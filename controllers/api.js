@@ -41,7 +41,6 @@ exports.login = function (req, res, next) {
                         let fc = await FConn.FConnect(username);
                         fc_list[username] = fc;
                         return res.redirect('total');
-                        // return res.redirect('excel');
 
                     })()
                 } else {
@@ -235,7 +234,7 @@ exports.api = function (req, res, next) {
                 cmd = cmd1;
                 // console.log(cmd);
             }
-            // console.log(cmd);
+            console.log(cmd);
             if (cmd.startsWith('fc.invoke')) {
                 eval(cmd); //注意，invoke调用也可能有返回，但invoke(put,k,v)无返回
                 res.write('录入成功！');
@@ -323,7 +322,7 @@ exports.remove = function (req, res, next) {
 
                 result.status = "撤销";
                 result.reason = reason;
-                console.log(result);
+                // console.log(result);
 
                     
                 fc.invoke("put",key,JSON.stringify(result));

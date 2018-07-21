@@ -123,11 +123,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <ul class="sidebar-menu" data-widget="tree">
                     <li class="header">目 录</li>
                     <!-- Optionally, you can add icons to the links -->
-                    <li class="active">
-                        <a href="/total">
-                            <i class="fa fa-link"></i>
-                            <span>主界面</span>
+                    <li><a href="/total"><i class="fa fa-link"></i> <span>主界面</span></a></li>
+                    <li><a href="/sample_pic"><i class="fa fa-link"></i> <span>查看样本</span></a></li>
+                    <li class="treeview active">
+                        <a href="#"><i class="fa fa-link"></i> <span>证书管理</span>
+                            <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                  </span>
                         </a>
+                        <ul class="treeview-menu">
+                            <li  class="active"><a href="/excel">批量录入</a></li>
+                            <li><a href="/revoke">撤销证书</a></li>
+                            <li><a href="/sample">加入样本</a></li>
+                        </ul>
                     </li>
                 </ul>
                 <!-- /.sidebar-menu -->
@@ -148,6 +156,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <a href="#">
                             <i class="fa fa-dashboard active"></i> 主页</a>
                     </li>
+                    <li>证书管理</li>
                     <li class="active">批量录入</li>
                 </ol>
             </section>
@@ -419,16 +428,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     }
                 };
 
-                console.log(diplima.length);
+                // console.log(diplima.length);
                 
                 if (diplima.length == 0) {
                     $('#status').html('<span style="color: red;">文件数据为空</span>');                    
                     $('#upload').attr("disabled", true);
-                    console.log(diplima.length);                   
+                    // console.log(diplima.length);                   
                 }else{
                     $('#status').html('<span>等待上传</span>');
                     $('#upload').attr("disabled", false);
-                    console.log(diplima.length); 
+                    // console.log(diplima.length); 
                 }
 
 

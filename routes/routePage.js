@@ -25,4 +25,7 @@ module.exports = function (app) {
     app.route('/sample')
         .get(renderPage.renderSample); 
 
+    app.route('/sample_pic')
+        .get(renderPage.renderSample_pic);
+
 };

@@ -110,16 +110,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <li class="header">目 录</li>
                 <!-- Optionally, you can add icons to the links -->
                 <li><a href="/total"><i class="fa fa-link"></i> <span>主界面</span></a></li>
-                <li ><a href="/sample_pic"><i class="fa fa-link"></i> <span>查看样本</span></a></li>
-                <li class="treeview active">
-                    <a href="#"><i class="fa fa-link"></i> <span>管理证书</span>
+                <li class="active"><a href="/sample_pic"><i class="fa fa-link"></i> <span>查看样本</span></a></li>
+                <li class="treeview">
+                    <a href="#"><i class="fa fa-link"></i> <span>证书管理</span>
                         <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="/excel">批量录入</a></li>
-                        <li class="active"><a href="/revoke">撤销证书</a></li>
+                        <li><a href="/revoke">撤销证书</a></li>
                         <li><a href="/sample">加入样本</a></li>
                     </ul>
                 </li>
@@ -134,29 +134,27 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                管理
-                <!-- <small>撤销证书</small> -->
+                查看样本
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i>主页</a></li>
-                <li>证书管理</li>
-                <li class="active">撤销证书</li>
+                <li class="active">查看样本</li>
             </ol>
         </section>
 
         <!-- Main content -->
         <section class="content container-fluid">
             <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-4">
                     <div class="box box-info">
                         <div class="box-header with-border">
-                            <h3 class="box-title">撤销证书</h3>
+                            <h3 class="box-title">查看样本</h3>
                         </div>
                         <form class="form-horizontal">
                             <div class="box-body">
                                 <div class="form-group">
-                                    <label for="Txtype" class="col-sm-2 control-label">证书类别：</label>
-                                        <div class="col-sm-4">
+                                    <label for="Txtype" class="col-sm-4 control-label">证书类别：</label>
+                                        <div class="col-sm-6">
                                             <select id="Txtype" name="Txtype" class="btn btn-block btn-default">
                                                     <option value="XWZ">学士学位证书</option>
                                                     <option value="BYZ" selected="selected">毕业证书</option>
@@ -164,26 +162,24 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         </div>
                                     </div>
                                 <div class="form-group">
-                                    <label for="num" class="col-sm-2 control-label">证书编号：</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="num">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="reason" class="col-sm-2 control-label">撤销理由：</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="reason">
+                                    <label for="certdate" class="col-sm-4 control-label">发证日期：</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control" id="certdate">
                                     </div>
                                 </div>
                             </div>
 
                             <div class="box-footer">
-                                <button type="button" id="cancel" class="btn btn-default">取消</button>
-                                <button type="button" id="revoke" class="btn btn-info pull-right">撤销</button>
+                                <button type="button" id="search" class="btn btn-info pull-right">查询</button>
                             </div>
                         </form>
-                        <!-- /.box-body -->
+                        <!-- /.box-body -->            
                     </div>
+                </div>
+                <!-- 显示图片 -->
+                <div class="col-md-8">
+                    <img src="#" id="img" style="display: none" width="100%" height="auto" alt="证书样本"></img>
+                    <label for="info" id="info" style="display: none">暂无样本</label>
                 </div>
             </div>
         </section>
@@ -212,39 +208,79 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.min.js"></script>
 <script>
-    $('#cancel').click(function () {
-        $('#num').val("");
-        $('#reason').val("");
-    });
 
+    $('#search').click(function () {
+        //清空图片
+        $('#img').hide();
+        $('#info').hide();    
+        $('#img').attr("src","#");
 
-    $('#revoke').click(function () {
-        console.log($('#num').val().length);
-
-        if($('#num').val().length != 18 && $('#Txtype').val() == "BYZ"){
-            alert("请输入正确的证书编号！");
-            return;
+        var certdate = $('#certdate').val();
+        var txtype = "";
+        if($('#Txtype').val() == "BYZ"){
+            txtype += "毕业证书";
+        }else{
+            txtype += "学士学位证书";
         }
-        if($('#num').val().length != 16 && $('#Txtype').val() == "XWZ"){
-            alert("请输入正确的证书编号！");
-            return;
+        
+        
+        //此处可以先判断输入日期是否有误
+        var cmd = '';
+
+        let selector1 = {
+            selector: {
+                $and: [
+                    {
+                        date: {
+                            $lte: certdate
+                        }
+                    },
+                    {
+                        txtype: {
+                            $eq: txtype
+                        }
+                    }
+                ]
+            }
         }
-        var key = $('#Txtype').val() + $('#num').val();
-        var reason = $('#reason').val();
-        var txtype = $('#Txtype').val();
-        console.log(key);
+
+        cmd += 'query("selectBy",\''+ JSON.stringify(selector1) + '\')';
+        console.log(cmd);
+
 
         $.ajax({
-            url: '/remove',
+            url: '/api',
             type: 'get',
             data: {
-                key: key,
-                reason: reason
+                cmd: cmd
             },
             success: function (data) {
-                $('#num').val("");
-                $('#reason').val("");
-                alert(data);
+                data = eval('(' + data + ')');
+                console.log(data);
+                let jsonobj = JSON.parse(data);
+                //{k1:{v1},k2:{v2},...}转换为[{_id:k1,v1},{_id:k2,v2},...]
+                let newobjs = [];
+                for (let x in jsonobj) {
+                    jsonobj[x]._id = x;
+                    newobjs.push(jsonobj[x]);              
+                }
+
+                if(newobjs.length != 0){
+                    //最后近日期
+                    var last_pic = newobjs[0];
+                    for (let i in newobjs) {
+                        var cur_pic = newobjs[i];
+                        cur_pic.date > last_pic.date ? last_pic = cur_pic : null;
+                    }
+                    $('#img').show();
+                    $('#img').attr("src",last_pic.base64);
+                }else{
+                    $('#info').show();
+                }
+
+                
+                
+                
             },
             error: function (e) {
                 alert('server error!');

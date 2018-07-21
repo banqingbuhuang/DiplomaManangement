@@ -241,10 +241,7 @@ exports.api = function (req, res, next) {
             } else {
                 var ret = await eval(cmd);
                 if (ret !== undefined) {
-
                     res.write(JSON.stringify(ret));
-
-
                 }
             }
         } catch (err) {

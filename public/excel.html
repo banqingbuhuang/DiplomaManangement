@@ -419,10 +419,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     }
                 };
 
-                if (flag) {
+                console.log(diplima.length);
+                
+                if (diplima.length == 0) {
+                    $('#status').html('<span style="color: red;">文件数据为空</span>');                    
+                    $('#upload').attr("disabled", true);
+                    console.log(diplima.length);                   
+                }else{
                     $('#status').html('<span>等待上传</span>');
-                    $('#upload').attr("disabled", false);  
+                    $('#upload').attr("disabled", false);
+                    console.log(diplima.length); 
                 }
+
+
+
 
             }
             // 以二进制方式打开文件

@@ -40,7 +40,7 @@ exports.login = function (req, res, next) {
                     (async () => {
                         let fc = await FConn.FConnect(username);
                         fc_list[username] = fc;
-                        return res.redirect('total');
+                        return res.redirect('conductor');
 
                     })()
                 } else {
@@ -223,7 +223,7 @@ exports.api = function (req, res, next) {
             var fc = fc_list[username];
             var cmd1 = 'fc.' + req.query.cmd;
             var cmd2 = 'fc.' + req.body.cmd;
-            var length = req.body.length;
+            // var length = req.body.length;
             var cmd ='';
             if(cmd1 == 'fc.undefined'){//post方法
 
@@ -234,8 +234,8 @@ exports.api = function (req, res, next) {
                 cmd = cmd1;
                 // console.log(cmd);
             }
-            console.log(cmd);
-            if (cmd.startsWith('fc.invoke')) {
+            // console.log(cmd);
+            if (cmd.startsWith('fc.invoke') || cmd.startsWith('fc.putBase64')) {
                 eval(cmd); //注意，invoke调用也可能有返回，但invoke(put,k,v)无返回
                 res.write('录入成功！');
             } else {
@@ -325,6 +325,58 @@ exports.remove = function (req, res, next) {
                 fc.invoke("put",key,JSON.stringify(result));
                 res.write('撤销成功！');
             }
+        } catch (err) {
+            console.error(err);
+            res.write('错误:' + err);
+        }
+        res.end();
+    })();
+};
+
+exports.getCert = function (req, res, next) {
+    let zsbh = req.body.zsbh;
+    let zslb = req.body.zslb;
+    console.log('zsbh=', zsbh);
+    (async () => {
+        try {
+            let fc = fc_list['admin'];
+            if (fc == undefined) {
+                fc = await FConn.FConnect('admin');
+                fc_list['admin'] = fc;
+            }
+            var key = zslb + zsbh;
+            let re = await fc.query("get", key);
+            return res.render('information', {
+                title: 'Information',
+                messages: re
+            });
+        } catch (err) {
+            console.log("Fabric连接出错或执行出错", err);
+        }
+    })();
+};
+
+exports.getModify = function (req, res, next) {
+    var username = req.session.username;
+    // console.log("username=" + username);
+    if (username === null) {
+        return res.render('login', {
+            title: 'Login',
+            messages: '请先登录!'
+        });
+    }
+   
+    (async () => {
+        try {
+            let fc = fc_list[username];
+            let zsbh = req.body.zsbh;
+            let zslb = req.body.zslb;
+            console.log('zsbh=', zsbh);
+            var key = zslb + zsbh;
+            console.log(key);
+            let re = await fc.query("get", key);
+            console.log(re);
+            res.write(re);
         } catch (err) {
             console.error(err);
             res.write('错误:' + err);

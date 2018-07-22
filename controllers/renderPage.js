@@ -33,19 +33,10 @@ exports.renderRegister = function (req, res) {
 
 //个人主页
 exports.renderTotal = function (req, res, next) {
-    // console.log('1');
-    if (!req.session.username) {
-        res.render('login', {
-            title: 'Login',
-            messages: '请先登录'
-        });
-    } else {
-        // console.log('total');
-        res.render('total', {
-            title: 'Total',
-            username: req.session.username
-        });
-    }
+    res.render('total', {
+        title: 'Total',
+        username: req.session.username
+    });
 };
 
 
@@ -106,4 +97,67 @@ exports.renderSample_pic = function (req, res, next) {
     res.render('sample_pic', {
         title: 'sample_pic',
     });
+};
+
+exports.renderCount = function (req, res, next) {
+    if (!req.session.username) {
+        res.render('login', {
+            title: 'Login',
+            messages: '请先登录'
+        });
+    } else {
+        res.render('count', {
+            title: 'Count',
+            username: req.session.username
+        });
+    }
+};
+exports.renderConductor = function (req, res, next) {
+    if (!req.session.username) {
+        res.render('login', {
+            title: 'Login',
+            messages: '请先登录'
+        });
+    } else {
+        res.render('conductor', {
+            title: 'Conductor',
+            username: req.session.username
+        });
+    }
+};
+
+
+exports.renderInformation = function (req, res, next) {
+    res.render('information', {
+        title: 'Information',
+        username: req.session.username
+    });
+};
+
+exports.renderOnemodify = function (req, res, next) {
+    if (!req.session.username) {
+        res.render('login', {
+            title: 'Login',
+            messages: '请先登录'
+        });
+    } else {
+        res.render('onemodify', {
+            title: 'Onemodify',
+            username: req.session.username
+        });
+    }
+};
+
+exports.renderOneinput = function (req, res, next) {
+    if (!req.session.username) {
+        res.render('login', {
+            title: 'Login',
+            messages: '请先登录'
+        });
+    } else {
+        res.render('oneinput', {
+            title: 'Oneinput',
+            username: req.session.username
+        });
+    }
 };

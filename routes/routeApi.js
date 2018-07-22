@@ -36,4 +36,10 @@ module.exports = function (app) {
     app.route('/remove')
         .get(api.remove);
 
+    app.route('/getCert')
+        .post(api.getCert);
+
+    app.route('/getModify')
+        .post(api.getModify);
+
 };

@@ -66,8 +66,8 @@ exports.logout = function (req, res, next) {
     let username = req.session.username;
     delete fc_list[username];
     req.session.destroy();
-    return res.render('login', {
-        title: 'Login',
+    return res.render('total', {
+        title: 'Total',
         messages: '已退出!'
     });
 };
@@ -160,7 +160,7 @@ exports.getMyTxHistory = function (req, res) {
                 //let writeset = tx['writeset'];
                 let writeset = tx.writeset;
                 //console.log(now_txid);
-                //for (let j = 0; j < writeset.length; j++) { //每一个key=bidXX
+                //for (let j = 0; j < writeset.length; j++) { //每一个key=bidschool
                 //    let the_b = writeset[j];
                 for (let the_b of writeset) {
                     //let the_history = await eval('fc.query("history","' + the_b['key'] + '")');
@@ -239,7 +239,8 @@ exports.api = function (req, res, next) {
                 eval(cmd); //注意，invoke调用也可能有返回，但invoke(put,k,v)无返回
                 res.write('录入成功！');
             } else {
-                var ret = await eval(cmd);
+
+                var ret =await eval(cmd);
                 if (ret !== undefined) {
                     res.write(JSON.stringify(ret));
                 }
@@ -315,7 +316,7 @@ exports.remove = function (req, res, next) {
                 res.write('该证书已被撤销！');                
             }else{
 
-                result = JSON.parse(curtx);
+                let result = JSON.parse(curtx);
 
                 result.status = "撤销";
                 result.reason = reason;
@@ -334,9 +335,10 @@ exports.remove = function (req, res, next) {
 };
 
 exports.getCert = function (req, res, next) {
-    let zsbh = req.body.zsbh;
-    let zslb = req.body.zslb;
-    console.log('zsbh=', zsbh);
+    let num = req.body.num;
+    let Txtype = req.body.txtype;
+    // console.log('num=', num);
+    // console.log('txtype=', Txtype);
     (async () => {
         try {
             let fc = fc_list['admin'];
@@ -344,11 +346,58 @@ exports.getCert = function (req, res, next) {
                 fc = await FConn.FConnect('admin');
                 fc_list['admin'] = fc;
             }
-            var key = zslb + zsbh;
+            var key = Txtype + num;
+            console.log(key);
             let re = await fc.query("get", key);
+            console.log(re);
+            let pic_src = '';
+            
+            if(re){//若证书存在，查找样本
+                let result = JSON.parse(re);
+                // console.log(result.certdate);
+                var certdate = result.certdate;
+                var txtype = result.txtype;
+                let selector1 = {
+                    selector: {
+                        $and: [{
+                                date: {
+                                    $lte: certdate
+                                }
+                            },
+                            {
+                                txtype: {
+                                    $eq: txtype
+                                }
+                            }
+                        ]
+                    }
+                }
+
+                let pic = await fc.query("selectBy",JSON.stringify(selector1));
+                
+
+                if(pic != '{}'){//存在样例 
+                    let jsonobj = JSON.parse(pic);
+                    //{k1:{v1},k2:{v2},...}转换为[{_id:k1,v1},{_id:k2,v2},...]
+                    let newobjs = [];
+                    for (let x in jsonobj) {
+                       jsonobj[x]._id = x;
+                        newobjs.push(jsonobj[x]);
+                    }
+                    //最后一张图片
+                    var last_pic = newobjs[0];
+                    for (let i in newobjs) {
+                        var cur_pic = newobjs[i];
+                        cur_pic.date > last_pic.date ? last_pic = cur_pic : null;
+                    }
+                    pic_src = last_pic.base64;
+                }        
+            }
+            
             return res.render('information', {
                 title: 'Information',
-                messages: re
+                messages: re,
+                pic_src: pic_src
             });
         } catch (err) {
             console.log("Fabric连接出错或执行出错", err);
@@ -369,10 +418,10 @@ exports.getModify = function (req, res, next) {
     (async () => {
         try {
             let fc = fc_list[username];
-            let zsbh = req.body.zsbh;
-            let zslb = req.body.zslb;
-            console.log('zsbh=', zsbh);
-            var key = zslb + zsbh;
+            let num = req.body.num;
+            let txtype = req.body.txtype;
+            console.log('num=', num);
+            var key = txtype + num;
             console.log(key);
             let re = await fc.query("get", key);
             console.log(re);
@@ -384,3 +433,68 @@ exports.getModify = function (req, res, next) {
         res.end();
     })();
 };
+
+exports.rangesearch = function (req, res, next) {//模糊查询
+    let num = req.body.num;
+    let school = req.body.school;
+    let certdate = req.body.certdate;
+    let txtype = req.body.txtype;
+    console.log(txtype);
+    (async () => {
+        try {
+            let fc = fc_list['admin'];
+            //console.log(fc);
+            if (fc == undefined) {
+                fc = await FConn.FConnect('admin');
+                fc_list['admin'] = fc;
+            }
+            //console.log(fc);
+            //let re = await fc.query("get", num);//查询key值
+
+            let filter = []
+            if (txtype !== "") {
+                filter.push({
+                    txtype: txtype
+                })
+            }
+            if (num !== "") {
+                filter.push({
+                    num: num
+                })
+            }
+            if (school !== "") {
+                filter.push({
+                    school: school
+                })
+            }
+            if (certdate !== "") {
+                filter.push({
+                    certdate: certdate
+                })
+            }
+            //if (txtype == num == school == certdate == "") {
+            //    filter.push({
+            //        certdate: "    "
+            //    })
+            // }
+            console.log(filter);
+            //怎么实现组合查询？
+            let selector1 = {
+                selector: {
+                    $and: filter
+                }
+            }
+            let res1 = await fc.query("selectBy", JSON.stringify(selector1));
+            console.log(res1);
+            if (res1 == "{}") {
+
+                res.write('未找到');
+            } else {
+                res.write(res1);
+            }
+            res.end();
+        } catch (err) {
+            console.error("Fabric连接出错或执行出错", err);
+        }
+    })()
+}

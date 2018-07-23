@@ -16,15 +16,7 @@
 
 
     <script src="https://t1.chei.com.cn/common/js/boomerang-min-20141211.js"></script>
-    <!-- <script>
-        BOOMR.init({
-            beacon_url: "https://www.chsi.com.cn/images/perf.gif",
-            log: null,
-            DNS: {
-                base_url: "https://*.chdi.com.cn/images/"
-            }
-        });
-    </script> -->
+
     <script>
         var _gaq = _gaq || [];
         _gaq.push(['_setAccount', 'UA-100524-1']);
@@ -54,9 +46,6 @@
                 <div class="clearit"></div>
             </div>
         </div>
-        <div class="t_header">
-            <div class="width1000 clearfix">
-        </div>
         <style type="text/css">
             .t_nav li {
                 padding-right: 7px;
@@ -65,7 +54,7 @@
     </div>
     <div class="content">
         <div class="main_lscx clearfix">
-            <div class="m_l" id="leftH">
+            <div class="m_l" id="leftH" style="width: 100%;padding-bottom: 80px;">
                 <h2>中国高等教育学历学位证书查询</h2>
                 <div class="m_cnt_m_lscx marginT20 clearfix">
                     <div class='form_box clearfix'>
@@ -75,8 +64,8 @@
                                     <tr>
                                         <td class='alignR' style="width: 100px;">证书类别：</td>
                                         <td class="form-group">
-                                            <div class="zsbh_tips"></div>
-                                            <select id="zslb" name="zslb" onchange="a()" autocomplete="off" required='true' maxlength="18" class='lscx_input' placeholder="证书类别">
+                                            <div class="num_tips"></div>
+                                            <select id="txtype" name="txtype" onchange="a()" autocomplete="off" required='true' maxlength="18" class='lscx_input' placeholder="证书类别">
                                                 <option value="BYZ">学历证书</option>
                                                 <option value="XWZ">学位证书</option>
                                             </select>
@@ -88,19 +77,19 @@
                                     <tr>
                                         <td class='alignR' style="width: 100px;">证书编号：</td>
                                         <td class="form-group">
-                                            <div class="zsbh_tips"></div>
-                                            <input type="text" class="lscx_input" minlength="18" maxlength="18" id="zsbh" name="zsbh" value="" autocomplete="off" required='true'
+                                            <div class="num_tips"></div>
+                                            <input type="text" class="lscx_input" minlength="18" maxlength="18" id="num" name="num" value="" autocomplete="off" required='true'
                                                 placeholder="证书编号" />
                                             <script type="text/javascript">
                                                 function a() {
-                                                    var select = document.getElementById("zslb");
+                                                    var select = document.getElementById("txtype");
                                                     var value = select.value;
                                                     if (value == "BYZ") {
-                                                        document.getElementById("zsbh").setAttribute("minlength", "18");
-                                                        document.getElementById("zsbh").setAttribute("maxlength", "18");
+                                                        document.getElementById("num").setAttribute("minlength", "18");
+                                                        document.getElementById("num").setAttribute("maxlength", "18");
                                                     } else {
-                                                        document.getElementById("zsbh").setAttribute("maxlength", "16");
-                                                        document.getElementById("zsbh").setAttribute("minlength", "16");
+                                                        document.getElementById("num").setAttribute("maxlength", "16");
+                                                        document.getElementById("num").setAttribute("minlength", "16");
                                                     };
                                                 }
                                             </script>
@@ -132,28 +121,6 @@
             </div>
         </div>
     </div>
-
-
-    <!-- <script>
-        $('#xueliSubmit').click(function () {
-            let zslb = $("#zslb").val();
-            let zsbh = $('#zsbh').val();
-            $.ajax({
-                url: '/getCert',
-                type: 'post',
-                data: {
-                    zslb: zslb,
-                    zsbh: zsbh
-                },
-                success: function (e) {
-                },                
-                error: function (e) {
-                    console.log(e);
-                    alert("server error!");
-                }
-            });
-        });
-    </script> -->
 
 </body>
 

@@ -3468,13 +3468,13 @@ table.text-center, table.text-center td, table.text-center th {
 }
 
 .login-page, .register-page {
-    background: #d2d6de url("../img/bg1.jpg");
+    background: #d2d6de url("../img/bg2.jpg");
     background-size: cover;
 }
 
 .login-box, .register-box {
-    position: relative;
-    left: 25%;
+    /* position: relative;
+    left: 25%; */
     width: 360px;
     margin: 7% auto
 

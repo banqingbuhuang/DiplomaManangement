@@ -42,4 +42,7 @@ module.exports = function (app) {
     app.route('/getModify')
         .post(api.getModify);
 
+    app.route('/rangesearch')
+        .post(api.rangesearch);
+
 };

@@ -19,13 +19,6 @@
 
     <script src="https://t1.chei.com.cn/common/js/boomerang-min-20141211.js"></script>
 
-    <!-- BOOMR.init({
-            beacon_url: "https://www.chsi.com.cn/images/perf.gif",
-            log: null,
-            DNS: {
-                base_url: "https://*.chdi.com.cn/images/"
-            }
-        }); -->
 </head>
 
 <body>
@@ -41,9 +34,6 @@
                 <div class="clearit"></div>
             </div>
         </div>
-        <div class="t_header">
-            <div class="width1000 clearfix">
-            </div>
         </div>
         <style type="text/css">
             .t_nav li {
@@ -54,13 +44,17 @@
     <div class="content">
         <div class="main clearfix">
 
-            <div class="m_l" id="leftH">
+            <div class="m_l" id="leftH" style="width: 100%;">
                 <h2>中国高等教育学历证书查询结果</h2>
                 <div id="result">
                     <div class="m_cnt_m clearfix">
                         <div class="xlcx-list">
-                            <table id="xl-table" class="table table-bordered table-striped">
-                                <tbody id="list">
+                            <table id="xl-table" class="table table-bordered table-striped" style="width: 100%; margin: auto;">
+                               
+                               <thead id="status">
+
+                               </thead> 
+                               <tbody id="list">
                                 </tbody>
                             </table>
                         </div>
@@ -85,17 +79,24 @@
     </div>
     <script>
         var mess = "<%= messages %>";
+        var pic_src = "<%= pic_src %>"
+        // console.log(pic);
         var reg = new RegExp("&#34;", "g"); //创建正则RegExp对象     
         mess = mess.replace(reg, '"');
-        console.log(mess);
+        pic_src = pic_src.replace(reg, '"');
+        // console.log(mess);
         let data = {};
-        // $('#img').hide();
-        // $('#info').hide();
-        // $('#img').attr("src", "#");
+        var html0='';
         var html1 = '';
         var cmd = '';
         if (mess) {
             data = eval('(' + mess + ')');
+            if(data.status != "undefined"){
+                html0='<tr><td>该证书已被撤销！</td></tr>'+
+                '<tr><td> 撤销原因为：</td></tr>'+
+                '<td>'+data.reason+'</td></tr>'+
+                '<tr><td>证书原始数据如下:</td></tr>'
+            }
             if (data.num.length == 18) {
                 html1 += '<tr> <th> 姓名 ：</th>' +
                     '<td>' + data.name + '</td>' +
@@ -120,7 +121,9 @@
                     '<tr><th > 层次： </th>' +
                     '<td>' + data.level + '</td>' +
                     '<th> 证书编号： </th>' +
-                    '<td>' + data.num + '</td></tr>'
+                    '<td>' + data.num + '</td></tr>' +
+                    '<tr><th> 发证日期： </th>' +
+                    '<td>' + data.certdate + '</td></tr>'
             } else {
                 html1 += '<tr> <th class="td-width-1"> 姓名 ：</th>' +
                     '<td class="td-width-2" id="name">' + data.name + '</td>' +
@@ -137,64 +140,21 @@
                     '<tr><th > 学科： </th>' +
                     '<td>' + data.degree + '</td>' +
                     '<th> 证书编号： </th>' +
-                    '<td>' + data.num + '</td></tr>'
+                    '<td>' + data.num + '</td></tr>'+
+                    '<tr><th> 发证日期： </th>' +
+                    '<td>' + data.certdate + '</td></tr>'
             }
 
-            var certdate = data.certdate;
-            var txtype = data.txtype;
-            let selector1 = {
-                selector: {
-                    $and: [{
-                            date: {
-                                $lte: certdate
-                            }
-                        },
-                        {
-                            txtype: {
-                                $eq: txtype
-                            }
-                        }
-                    ]
-                }
+            if(pic_src){
+                $('#img').show();
+                $('#img').attr("src", pic_src);
+            }else{
+                $('#info').show();
             }
-            cmd += 'query("selectBy",\'' + JSON.stringify(selector1) + '\')';
-            console.log(cmd);
-            $.ajax({
-                url: '/api',
-                type: 'get',
-                data: {
-                    cmd: cmd
-                },
-                success: function (data) {
-                    data = eval('(' + data + ')');
-                    console.log(data);
-                    let jsonobj = JSON.parse(data);
-                    //{k1:{v1},k2:{v2},...}转换为[{_id:k1,v1},{_id:k2,v2},...]
-                    let newobjs = [];
-                    for (let x in jsonobj) {
-                        jsonobj[x]._id = x;
-                        newobjs.push(jsonobj[x]);
-                    }
-                    if (newobjs.length != 0) {
-                        //最后近日期
-                        var last_pic = newobjs[0];
-                        for (let i in newobjs) {
-                            var cur_pic = newobjs[i];
-                            cur_pic.date > last_pic.date ? last_pic = cur_pic : null;
-                        }
-                        $('#img').show();
-                        $('#img').attr("src", last_pic.base64);
-                    } else {
-                        $('#info').show();
-                    }
-                },
-                error: function (e) {
-                    alert('server error!');
-                }
-            });
         } else if (mess === "") {
             html1 = '<tr> <td > 恭喜你找到一张假证！ </td></tr>'
         }
+        $('#status').append(html0);
         $('#list').append(html1);
         var certdate = $('#certdate').val();
         var txtype = "";

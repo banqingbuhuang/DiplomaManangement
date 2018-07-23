@@ -40,7 +40,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>F</b>NC</span>
             <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg"><b>学位证书认证系统</b></span>
+            <span class="logo-lg"><b>证书认证系统</b></span>
         </a>
 
         <!-- Header Navbar -->
@@ -112,12 +112,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <li><a href="/conductor"><i class="fa fa-link"></i><span>主界面</span></a></li>
                 <li class="treeview">
                     <a href="#">
-                        <i class="fa fa-link"></i><span>单项操作</span>
+                        <i class="fa fa-link"></i><span>单个操作</span>
                         <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="/oneinput">单项录入</a></li>
-                        <li><a href="/onemodify">单项修改</a></li>
+                        <li><a href="/oneinput">单个录入</a></li>
+                        <li><a href="/onemodify">单个修改</a></li>
                     </ul>
                 </li>
                 <li><a href="/excel"><i class="fa fa-link"></i><span>批量录入</span></a></li>
@@ -140,7 +140,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i>主页</a></li>
-                <li>证书管理</li>
                 <li class="active">撤销证书</li>
             </ol>
         </section>
@@ -220,7 +219,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
     $('#revoke').click(function () {
-        console.log($('#num').val().length);
+        // console.log($('#num').val().length);
 
         if($('#num').val().length != 18 && $('#Txtype').val() == "BYZ"){
             alert("请输入正确的证书编号！");

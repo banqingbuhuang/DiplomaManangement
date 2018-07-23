@@ -91,13 +91,6 @@ exports.renderSample = function (req, res, next) {
     }
 };
 
-//查看图片sample_pic
-exports.renderSample_pic = function (req, res, next) {
-        // console.log('total');
-    res.render('sample_pic', {
-        title: 'sample_pic',
-    });
-};
 
 exports.renderCount = function (req, res, next) {
     if (!req.session.username) {

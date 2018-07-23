@@ -51,9 +51,9 @@
                         <div class="xlcx-list">
                             <table id="xl-table" class="table table-bordered table-striped" style="width: 100%; margin: auto;">
                                
-                               <thead id="status">
+                               <tbody id="status">
 
-                               </thead> 
+                               </tbody> 
                                <tbody id="list">
                                 </tbody>
                             </table>
@@ -91,7 +91,7 @@
         var cmd = '';
         if (mess) {
             data = eval('(' + mess + ')');
-            if(data.status != "undefined"){
+            if(data.status){
                 html0='<tr><td>该证书已被撤销！</td></tr>'+
                 '<tr><td> 撤销原因为：</td></tr>'+
                 '<td>'+data.reason+'</td></tr>'+

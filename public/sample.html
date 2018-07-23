@@ -250,6 +250,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
             });
             $('#Txtype').on("change", function () {
                 $('#FileList').empty("");
+                var inn = $('#upfile');
+                inn.val('');
             });
             $('#upfile').on("change", function (e) {
                 var file = this.files[0];
@@ -267,9 +269,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 $('#FileList').empty("");
                 html = '<tr><td id="tds">' + e.currentTarget.files[0].name + '</td>' +
                     '<td id="tds">' + (e.currentTarget.files[0].size / 1000).toFixed(1) + 'KB</td>' +
-                    // '<td id="status"><span>检查文件内容</span></td>' +
                     '<td id="status"><span>等待上传</span></td>' +
-                    '<td><input id="date" style="disabled:"false"" bgcolor="#f4f4f4"></input></td></tr>'
+                    '<td><input type="date" id="date" style="disabled:"false"" bgcolor="#f4f4f4"></input></td></tr>'
                 $('#FileList').append(html);
         });
         $('#upload').click(function () {

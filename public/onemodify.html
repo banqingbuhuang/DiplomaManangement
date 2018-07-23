@@ -33,6 +33,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+    <style>
+        .msg{
+            display: none;
+            color: red;
+            font-weight: normal;
+            
+        };
+    </style>
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -187,8 +196,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                <table class="table" style="border-top: none">
                                    <tbody id="XWZ_body" style="display: none">
                                        <tr>
-                                           <td style="text-align: right"><label for="num">证书编号：</label></td>
-                                           <td><input type="text" class="form-control num" autocomplete="off" autocomplete="off" required="true" minlength="16" maxlength="16"></td>
+                                            <td style="text-align: right"><label for="num">证书编号：</label></td>
+                                            <td>
+                                               <input type="text" class="form-control num">
+                                               <label for="msg" class="msg">请输入16位的证书编号</label>
+                                            </td>
                                            <td style="text-align: right"><label for="txtype">层　　次：</label></td>
                                            <td>
                                                 <select class="btn btn-default txtype">
@@ -218,28 +230,43 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                 </select>
                                             </td>
                                             <td style="text-align: right"><label for="school">学　　校：</label></td>
-                                            <td><input type="text" class="form-control school" autocomplete="off" required="true"></td>
+                                            <td>
+                                                <input type="text" class="form-control school">
+                                                <label for="msg" class="msg">学校不能为空</label>
+                                            </td>
                                         </tr>
                                        <tr>
                                             <td style="text-align: right"><label for="certdate">发证日期：</label></td>
-                                            <td><input type="text" class="form-control certdate"></td>
+                                            <td>
+                                                <input type="date" class="form-control certdate">
+                                                <label for="msg" class="msg">请输入正确的发证日期</label>
+                                            </td>
                                             <td style="text-align: right"><label for="name">姓　　名：</label></td>
-                                            <td><input type="text" class="form-control name" autocomplete="off" required="true"></td>
+                                            <td>
+                                                <input type="text" class="form-control name">
+                                                <label for="msg" class="msg">姓名不能为空</label>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td style="text-align: right"><label for="sex">性　　别：</label></td>
                                             <td>
-                                                <select class="btn btn-default" name="sex" id="sex">
-                                                    <option value="male" selected="selected">男</option>
-                                                    <option value="female">女</option>
+                                                <select class="btn btn-default sex">
+                                                    <option value="男">男</option>
+                                                    <option value="女">女</option>
                                                 </select>
                                             </td>
                                             <td style="text-align: right"><label for="birthday">出生日期：</label></td>
-                                            <td><input type="text" class="form-control birthday"></td>
+                                            <td>
+                                                <input type="date" class="form-control birthday">
+                                                <label for="msg" class="msg">请输入正确的出生日期</label>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td style="text-align: right"><label for="major">专　　业：</label></td>
-                                            <td><input type="text" class="form-control major" autocomplete="off" required="true"></td>
+                                            <td>
+                                                <input type="text" class="form-control major">
+                                                <label for="msg" class="msg">专业不能为空</label>
+                                            </td>
                                             <td style="text-align: right"><label for="status">证书状态：</label></td>
                                             <td><input type="text" class="form-control status"></td>
                                         </tr>
@@ -252,9 +279,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                    <tbody id="BYZ_body" style="display: none">
                                         <tr>
                                             <td style="text-align: right"><label for="num">证书编号：</label></td>
-                                            <td><input type="text" class="form-control num" autocomplete="off" autocomplete="off" required="true" minlength="18" maxlength="18"></td>
+                                            <td>
+                                                <input type="text" class="form-control num col-lg-6">
+                                                <label for="msg" class="msg">请输入18位的证书编号</label>
+                                                </input>
+                                            </td>
                                             <td style="text-align: right"><label for="txtype">证书类别：</label></td>
-                                            <td><input type="text" class="form-control txtype" value="毕业证书"></td>
+                                            <td><input type="text" class="form-control txtype" value="毕业证书" disabled="disabled"></td>
                                         </tr>
                                         <tr>
                                             <td style="text-align: right"><label for="schoolsystem">学　　制：</label></td>
@@ -265,34 +296,55 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                 </select>
                                             </td>
                                             <td style="text-align: right"><label for="school">学　　校：</label></td>
-                                            <td><input type="text" class="form-control school" autocomplete="off" required="true"></td>
+                                            <td>
+                                                <input type="text" class="form-control school">
+                                                <label for="msg" class="msg">学校不能为空</label>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td style="text-align: right"><label for="certdate">发证日期：</label></td>
-                                            <td><input type="text" class="form-control certdate"></td>
+                                            <td>
+                                                <input type="date" class="form-control certdate">
+                                                <label for="msg" class="msg">请输入正确的发证日期</label>
+                                            </td>
                                             <td style="text-align: right"><label for="name">姓　　名：</label></td>
-                                            <td><input type="text" class="form-control name" autocomplete="off" required="true"></td>
+                                            <td>
+                                                <input type="text" class="form-control name">
+                                                <label for="msg" class="msg">姓名不能为空</label>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td style="text-align: right"><label for="sex">性　　别：</label></td>
                                             <td>
-                                                <select class="btn btn-default" name="sex" id="sex">
-                                                    <option value="male" selected="selected">男</option>
-                                                    <option value="female">女</option>
+                                                <select class="btn btn-default sex">
+                                                    <option value="男">男</option>
+                                                    <option value="女">女</option>
                                                 </select>
                                             </td>
                                             <td style="text-align: right"><label for="birthday">出生日期：</label></td>
-                                            <td><input type="text" class="form-control birthday"></td>
+                                            <td>
+                                                <input type="date" class="form-control birthday">
+                                                <label for="msg" class="msg">请输入正确的出生日期</label>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td style="text-align: right"><label for="begin">入学日期：</label></td>
-                                            <td><input type="text" class="form-control" id="begin"></td>
+                                            <td>
+                                                <input type="date" class="form-control" id="begin">
+                                                <label for="msg" class="msg">请输入正确的入学日期</label>
+                                            </td>
                                             <td style="text-align: right"><label for="end">毕业日期：</label></td>
-                                            <td><input type="text" class="form-control" id="end"></td>
+                                            <td>
+                                                <input type="date" class="form-control" id="end">
+                                                <label for="msg" class="msg">请输入正确的毕业日期</label>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td style="text-align: right"><label for="major">专　　业：</label></td>
-                                            <td><input type="text" class="form-control major" autocomplete="off" required="true"></td>
+                                            <td>
+                                                <input type="text" class="form-control major">
+                                                <label for="msg" class="msg">专业不能为空</label>
+                                            </td>
                                             <td style="text-align: right"><label for="level">层　　次：</label></td>
                                             <td>
                                                 <select class="btn btn-default" id="level" name="level">
@@ -312,7 +364,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                 </select>
                                             </td>
                                             <td style="text-align: right"><label for="class">学历类别：</label></td>
-                                            <td><input type="text" class="form-control" id="class" autocomplete="off" required="true"></td>
+                                            <td>
+                                                <input type="text" class="form-control" id="class">
+                                                <label for="msg" class="msg">学历类别不能为空</label>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td style="text-align: right"><label for="status">证书状态：</label></td>
@@ -374,7 +429,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             let num = $('#num').val();
             let key = Txtype + num;
             let cmd = 'query("get","' + key + '")';
-            // console.log(cmd);
+            console.log(cmd);
             $.ajax({
                 url: '/api',
                 type: 'post',
@@ -382,12 +437,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     cmd:cmd
                 },
                 success: function (data) {
+                    data = eval('(' + data + ')');
+                    console.log(data)
                     if(data){
                         $('#Btn').show();
-                        // data = JSON.parse(data);
-                        data = eval('(' + data + ')');
                         data = JSON.parse(data);
-                        // console.log(data);
+                        console.log(data);
                         // console.log(data.num);
                         $('.num').val(data.num);
                         $('.txtype').val(data.txtype);
@@ -406,9 +461,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             $('#form').val(data.form);
                             $("#schoolsystem").val(data.schoolsystem);
                             $('#BYZ_body').show();
+                            $('#XWZ_body').hide();
                         }else{//学位证
                             $('#degree').val(data.degree);
                             $('#XWZ_body').show();
+                            $('#BYZ_body').hide();
                         }
                         if(data.status){
                             $('.status').val(data.status);
@@ -418,6 +475,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             $('.reason').attr("disabled",true);
                     }else{
                         alert("查无此证！");
+                        $('#BYZ_body').hide();
+                        $('#XWZ_body').hide();
                     }
         
                 },
@@ -434,62 +493,197 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
         });
 
-        //检查日期正则表达式
-        var regex = new RegExp(
-            /^(?:(?!0000)[0-9]{4}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[0-9]{2}(?:0[48]|[2468][048]|[13579][26])|(?:0[48]|[2468][048]|[13579][26])00)-02-29)$/
-        );
+        var flag = true;
+        // //检查日期正则表达式
+        // var regex = new RegExp(
+        //     /^(?:(?!0000)[0-9]{4}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[0-9]{2}(?:0[48]|[2468][048]|[13579][26])|(?:0[48]|[2468][048]|[13579][26])00)-02-29)$/
+        // );
+        //失去焦点事件
+        $('#BYZ_body .num').blur(function(){
+            if($('#BYZ_body .num').val().length != 18){
+                flag = false;
+                $(this).parent().find($('.msg')).show();
+            }else{
+                flag = true;
+                $(this).parent().find($('.msg')).hide();
+            }
+            if(!flag){
+                $('#modify').attr("disabled",true);
+            }else{
+                $('#modify').attr("disabled",false);
+            }
+        })
+
+        $('#XWZ_body .num').blur(function(){
+            if($('#XWZ_body .num').val().length != 18){
+                flag = false;
+                $(this).parent().find($('.msg')).show();
+            }else{
+                flag = true;
+                $(this).parent().find($('.msg')).hide();
+            }
+            if(!flag){
+                $('#modify').attr("disabled",true);
+            }else{
+                $('#modify').attr("disabled",false);
+            }
+        })
+
+        $('.school').blur(function(){
+            if(!$(this).val()){
+                flag = false;
+                $(this).parent().find($('.msg')).show();
+            }else{
+                flag = true;
+                $(this).parent().find($('.msg')).hide();
+            }
+            if(!flag){
+                $('#modify').attr("disabled",true);
+            }else{
+                $('#modify').attr("disabled",false);
+            }
+        })
+
+        $('.certdate').blur(function(){
+            if(!$(this).val()){
+                flag = false;
+                $(this).parent().find($('.msg')).show();
+            }else{
+                flag = true;
+                $(this).parent().find($('.msg')).hide();
+            }
+            if(!flag){
+                $('#modify').attr("disabled",true);
+            }else{
+                $('#modify').attr("disabled",false);
+            }
+        })
+
+        $('.name').blur(function(){
+            if(!$(this).val()){
+                flag = false;
+                $(this).parent().find($('.msg')).show();
+            }else{
+                flag = true;
+                $(this).parent().find($('.msg')).hide();
+            }
+            if(!flag){
+                $('#modify').attr("disabled",true);
+            }else{
+                $('#modify').attr("disabled",false);
+            }
+        })
+
+        $('.birthday').blur(function(){
+            if(!$(this).val()){
+                flag = false;
+                $(this).parent().find($('.msg')).show();
+            }else{
+                flag = true;
+                $(this).parent().find($('.msg')).hide();
+            }
+            if(!flag){
+                $('#modify').attr("disabled",true);
+            }else{
+                $('#modify').attr("disabled",false);
+            }
+        })
+
+        $('.major').blur(function(){
+            if(!$(this).val()){
+                flag = false;
+                $(this).parent().find($('.msg')).show();
+            }else{
+                flag = true;
+                $(this).parent().find($('.msg')).hide();
+            }
+            if(!flag){
+                $('#modify').attr("disabled",true);
+            }else{
+                $('#modify').attr("disabled",false);
+            }
+        })
+
+        $('#begin').blur(function(){
+            if(!$(this).val()){
+                flag = false;
+                $(this).parent().find($('.msg')).show();
+            }else{
+                flag = true;
+                $(this).parent().find($('.msg')).hide();
+            }
+            if(!flag){
+                $('#modify').attr("disabled",true);
+            }else{
+                $('#modify').attr("disabled",false);
+            }
+        })
+
+        $('#end').blur(function(){
+            if(!$(this).val()){
+                flag = false;
+                $(this).parent().find($('.msg')).show();
+            }else{
+                flag = true;
+                $(this).parent().find($('.msg')).hide();
+            }
+            if(!flag){
+                $('#modify').attr("disabled",true);
+            }else{
+                $('#modify').attr("disabled",false);
+            }
+        })
+
+        $('#class').blur(function(){
+            if(!$(this).val()){
+                flag = false;
+                $(this).parent().find($('.msg')).show();
+            }else{
+                flag = true;
+                $(this).parent().find($('.msg')).hide();
+            }
+            if(!flag){
+                $('#modify').attr("disabled",true);
+            }else{
+                $('#modify').attr("disabled",false);
+            }
+        })
 
 
         $('#modify').click(function(){
-            
-            var num = $('.num').val();
-            var school = $('.school').val();
-            var certdate = $('.certdate').val();
-            var name = $('.name').val();
-            var sex = $(".sex").val();
-            var birthday = $(".birthday").val();
-            var major = $(".major").val();
-
-            // console.log(num);
-            if(!regex.test(certdate)){
-                alert("发证日期格式不正确，日期格式为：yyyy-mm-dd");
-                return;
-            }
-            if(!regex.test(birthday)){
-                alert("出生日期格式不正确，日期格式为：yyyy-mm-dd");
-                return;
-            }
             //毕业证
             if($('#Txtype').val() == "BYZ"){
 
-                // var num = $('#BYZ_body > .num').val();
-                // var school = $('.school').val();
-                // var certdate = $('.certdate').val();
-                // var name = $('.name').val();
-                // var sex = $(".sex").val();
-                // var birthday = $(".birthday").val();
-                // var major = $(".major").val();
+                var num = $('#BYZ_body .num').val();
+                var school = $('#BYZ_body .school').val();
+                var certdate = $('#BYZ_body .certdate').val();
+                var name = $('#BYZ_body .name').val();
+                var sex = $('#BYZ_body .sex').val();
+                var birthday = $('#BYZ_body .birthday').val();
+                var major = $('#BYZ_body .major').val();
+                var txtype = $('#BYZ_body .txtype').val();
 
-                var txtype = "毕业证书"
                 var begin = $('#begin').val();
                 var end = $('#end').val();
                 var level = $('#level').val();
-                var classes = $('#class').val();
+                var classes = $('#class').val();//用class会报错
                 var form = $('#form').val();
                 var schoolsystem = $("#schoolsystem").val();
-                console.log(begin);
-                if(!regex.test(begin)){
-                    alert("入学日期格式不正确，日期格式为：yyyy-mm-dd");
-                    return;
-                }
-                if(!regex.test(end)){
-                    alert("毕业日期格式不正确，日期格式为：yyyy-mm-dd");
-                    return;
-                }
+                console.log(sex);
             }else{//学位证
-                var txtype = $('#txtype').val();
+
+                var num = $('#XWZ_body .num').val();
+                var school = $('#XWZ_body .school').val();
+                var certdate = $('#XWZ_body .certdate').val();
+                var name = $('#XWZ_body .name').val();
+                var sex = $('#XWZ_body .sex').val();
+                var birthday = $('#XWZ_body .birthday').val();
+                var major = $('#XWZ_body .major').val();
+                var txtype = $('#XWZ_body .txtype').val();
+
                 var degree = $('#degree').val();
             };
+
             if($('.status').val()){
                 var status = $('.status').val();
                 var reason = $('.reason').val();
@@ -531,7 +725,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 error: function (e) {
                     alert('server error!');
                 }
-            }); 
+            });
         });
     </script>
 </body>

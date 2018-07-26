@@ -35,7 +35,7 @@ exports.renderRegister = function (req, res) {
 exports.renderTotal = function (req, res, next) {
     res.render('total', {
         title: 'Total',
-        username: req.session.username
+        // username: req.session.username
     });
 };
 
@@ -52,7 +52,9 @@ exports.renderRevoke = function (req, res, next) {
         // console.log('total');
         res.render('revoke', {
             title: 'Revoke',
-            username: req.session.username
+            username: req.session.username,
+            college: req.session.college,
+            role: req.session.role
         });
     }
 };
@@ -69,7 +71,9 @@ exports.renderExcel = function (req, res, next) {
         // console.log('total');
         res.render('excel', {
             title: 'excel',
-            username: req.session.username
+            username: req.session.username,
+            college: req.session.college,
+            role: req.session.role
         });
     }
 };
@@ -86,7 +90,9 @@ exports.renderSample = function (req, res, next) {
         // console.log('total');
         res.render('sample', {
             title: 'Sample',
-            username: req.session.username
+            username: req.session.username,
+            college: req.session.college,
+            role: req.session.role
         });
     }
 };
@@ -101,7 +107,9 @@ exports.renderCount = function (req, res, next) {
     } else {
         res.render('count', {
             title: 'Count',
-            username: req.session.username
+            username: req.session.username,
+            college: req.session.college,
+            role: req.session.role
         });
     }
 };
@@ -114,7 +122,9 @@ exports.renderConductor = function (req, res, next) {
     } else {
         res.render('conductor', {
             title: 'Conductor',
-            username: req.session.username
+            username: req.session.username,
+            college: req.session.college,
+            role: req.session.role
         });
     }
 };
@@ -123,7 +133,7 @@ exports.renderConductor = function (req, res, next) {
 exports.renderInformation = function (req, res, next) {
     res.render('information', {
         title: 'Information',
-        username: req.session.username
+        // username: req.session.username
     });
 };
 
@@ -136,21 +146,25 @@ exports.renderOnemodify = function (req, res, next) {
     } else {
         res.render('onemodify', {
             title: 'Onemodify',
-            username: req.session.username
+            username: req.session.username,
+            college: req.session.college,
+            role: req.session.role
         });
     }
 };
 
-exports.renderOneinput = function (req, res, next) {
+exports.renderHistory = function (req, res, next) {
     if (!req.session.username) {
         res.render('login', {
             title: 'Login',
             messages: '请先登录'
         });
     } else {
-        res.render('oneinput', {
-            title: 'Oneinput',
-            username: req.session.username
+        res.render('history', {
+            title: 'History',
+            username: req.session.username,
+            college: req.session.college,
+            role: req.session.role
         });
     }
 };

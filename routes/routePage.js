@@ -29,8 +29,8 @@ module.exports = function (app) {
         .get(renderPage.renderSample); 
 
     
-    app.route('/oneinput')
-        .get(renderPage.renderOneinput);
+    app.route('/history')
+        .get(renderPage.renderHistory);
 
     app.route('/onemodify')
         .get(renderPage.renderOnemodify);

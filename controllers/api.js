@@ -1,3 +1,4 @@
+
 /**
  * 响应客户端api请求，调用API，返回json结果作为响应
  * 注意，方法名应与routeApi.js保持一致
@@ -15,9 +16,35 @@ var DBurl = 'mongodb://localhost:27017/myproject';
 const assert = require('assert');
 var mgclient = null;
 
+var user_list = {};
+// var user = {};
+
 exports.login = function (req, res, next) {
     let username = req.body.username;
     let password = req.body.password;
+
+    let college = req.body.college;
+    let role = req.body.role;
+
+    var timestamp = Date.now();//获取当前时间戳
+    //剩余次数和时间戳
+    var user_info = {
+        "num": 10,
+        "timestamp" : timestamp
+    };
+    if(user_list[username]){//已存在
+        var old_timestamp = user_list[username].timestamp;
+        if(user_list[username].num == 0 && (new Date(timestamp).toDateString() == new Date(old_timestamp).toDateString())){
+            return res.render('login', {
+                title: 'Login',
+                messages: ('今日剩余次数为0，请明日再试！')
+            });
+        }
+    }else{
+        user_list[username] = user_info;
+    }
+
+
     (async () => {
         try {
             mgclient = await MongoClient.connect(DBurl);
@@ -30,9 +57,9 @@ exports.login = function (req, res, next) {
                 //throw new Error('用户不存在');
                 return res.render('login', {
                     title: 'Login',
-                    messages: '未注册用户'
+                    messages: '无效的用户名或密码错误!'
                 });
-            } else {
+            } else {//成功登录
                 password = crypto.pbkdf2Sync(password, 'njustXP2018', 10000, 64, 'md5').toString('base64');
                 if (username === docs[0]._id && password === docs[0].pwd) {
                     req.session.username = username;
@@ -43,10 +70,18 @@ exports.login = function (req, res, next) {
                         return res.redirect('conductor');
 
                     })()
-                } else {
+                } else {//密码错误
+                    var num = user_list[username].num;
+                    user_info = {
+                        "num": num - 1,
+                        "timestamp" : timestamp
+                    };
+                    user_list[username] = user_info;
+                    var times = user_list[username].num;
+
                     return res.render('login', {
                         title: 'Login',
-                        messages: '密码错误'
+                        messages: ('无效的用户名或密码错误!')
                     });
                 }
             }
@@ -62,6 +97,9 @@ exports.login = function (req, res, next) {
     })()
 };
 
+
+
+
 exports.logout = function (req, res, next) {
     let username = req.session.username;
     delete fc_list[username];
@@ -71,7 +109,6 @@ exports.logout = function (req, res, next) {
         messages: '已退出!'
     });
 };
-
 
 exports.confirm = function (req, res, next) {
     let username = req.body.username;
@@ -96,9 +133,13 @@ exports.confirm = function (req, res, next) {
     } catch (err) {
     }
 };
+
 exports.register = function (req, res, next) {
     let username = req.body.username;
     let password = req.body.password;
+
+    let college = req.body.college;
+    let role = req.body.role;
 
     var register = require('../../fabcar/registerUser');
     var file = 'crtuser.json';
@@ -111,7 +152,8 @@ exports.register = function (req, res, next) {
             // console.log(cert);
             let salt = 'njustXP2018';
             password = crypto.pbkdf2Sync(password, salt, 10000, 64, 'md5').toString('base64');
-            let write = { _id: username, pwd: password, ca: cert.toString(), isValid: true };
+            // let write = { _id: username, pwd: password, ca: cert.toString(), isValid: true };
+            let write = { _id: username, pwd: password, college: college, role: role, phone: phone,  ca: cert.toString(), isValid: true };
             let r = await col.insertOne(write);
             const assert = require('assert');
             assert.equal(1, r.insertedCount);
@@ -135,6 +177,7 @@ exports.register = function (req, res, next) {
 
 exports.getMyTxHistory = function (req, res) {
     var username = req.session.username;
+
     // console.log(username);
     if (username === null) {
         return res.render('login', {
@@ -211,6 +254,10 @@ exports.getMyTxHistory = function (req, res) {
 //通用API调用， 比如 /?cmd=query('history','bid01')
 exports.api = function (req, res, next) {
     var username = req.session.username;
+
+    let college = req.body.college;
+    let role = req.body.role;
+
     if (username === null) {
         return res.render('login', {
             title: 'Login',
@@ -242,7 +289,8 @@ exports.api = function (req, res, next) {
 
                 var ret =await eval(cmd);
                 if (ret !== undefined) {
-                    res.write(JSON.stringify(ret));
+                    res.write(ret);
+                    // console.log(ret);
                 }
             }
         } catch (err) {
@@ -257,6 +305,7 @@ exports.api = function (req, res, next) {
 
 exports.getAllTx = function (req, res, next) {
     var username = req.session.username;
+
     console.log("username=" + username);
     if (username === null) {
         return res.render('login', {
@@ -294,6 +343,10 @@ exports.getAllTx = function (req, res, next) {
 
 exports.remove = function (req, res, next) {
     var username = req.session.username;
+
+    let college = req.body.college;
+    let role = req.body.role;
+
     console.log("username=" + username);
     if (username === null) {
         return res.render('login', {
@@ -322,7 +375,6 @@ exports.remove = function (req, res, next) {
                 result.reason = reason;
                 // console.log(result);
 
-                    
                 fc.invoke("put",key,JSON.stringify(result));
                 res.write('撤销成功！');
             }
@@ -337,6 +389,7 @@ exports.remove = function (req, res, next) {
 exports.getCert = function (req, res, next) {
     let num = req.body.num;
     let Txtype = req.body.txtype;
+
     // console.log('num=', num);
     // console.log('txtype=', Txtype);
     (async () => {
@@ -402,35 +455,6 @@ exports.getCert = function (req, res, next) {
         } catch (err) {
             console.log("Fabric连接出错或执行出错", err);
         }
-    })();
-};
-
-exports.getModify = function (req, res, next) {
-    var username = req.session.username;
-    // console.log("username=" + username);
-    if (username === null) {
-        return res.render('login', {
-            title: 'Login',
-            messages: '请先登录!'
-        });
-    }
-   
-    (async () => {
-        try {
-            let fc = fc_list[username];
-            let num = req.body.num;
-            let txtype = req.body.txtype;
-            console.log('num=', num);
-            var key = txtype + num;
-            console.log(key);
-            let re = await fc.query("get", key);
-            console.log(re);
-            res.write(re);
-        } catch (err) {
-            console.error(err);
-            res.write('错误:' + err);
-        }
-        res.end();
     })();
 };
 

@@ -1,167 +1,418 @@
-<!doctype html>
+<!DOCTYPE html>
+<!--
+This is a starter template page. Use this page to start your new project from
+scratch. This page gets rid of all links and provides the needed markup only.
+-->
 <html>
 
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=chrome">
     <title>
         <%= title %>
     </title>
-    <link rel="icon" href="/favicon.ico?v=1483494816229" type="image/x-icon" />
-    <link rel="stylesheet" href='https://t4.chei.com.cn/chsi/css/common2014.css?v=1483494816229'>
-    <link rel="stylesheet" href='https://t1.chei.com.cn/common/ch/iconfont.css?v=1483494816229'>
-    <link rel="stylesheet" href='https://t1.chei.com.cn/chsi/xlcx/lscx/css/min/lscx.min.css?v=1483494816231' />
-    <link rel="stylesheet" href='https://t1.chei.com.cn/common/plugins/dialog/6.0.5/css/ui-dialog.css?v=1483494816229'>
-    <script src='https://t1.chei.com.cn/common/jquery/1.9.1/jquery.min.js?v=1483494816229'></script>
-    <script src='https://t1.chei.com.cn/common/plugins/dialog/6.0.5/dialog-min.js?v=1483494816229'></script>
-    <script src='https://t1.chei.com.cn/common/plugins/validation/jquery.validate.min.js?v=1483494816229'></script>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="bower_components/morris.js/morris.css">
 
+    <link rel="stylesheet" href="bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+    <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
+          page. However, you can choose any other skin. Make sure you
+          apply the skin class to the body tag so the changes take effect. -->
+    <link rel="stylesheet" href="dist/css/skins/skin-blue.min.css">
 
-    <script src="https://t1.chei.com.cn/common/js/boomerang-min-20141211.js"></script>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+
+    <!-- Google Font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
 </head>
 
-<body>
-    <div class="header">
-        <div class="t_top_nav">
-            <div class="width1000 clearfix">
-                <div class="t_top_nav_l">
-                    <span style="color:#d94840">&nbsp;</span>
-                </div>
-                <div class="t_top_nav_r">
-                    <a href='/total' target="_parent">返回查询</a>
-                </div>
-                <div class="clearit"></div>
-            </div>
-        </div>
-        </div>
-        <style type="text/css">
-            .t_nav li {
-                padding-right: 7px;
-            }
-        </style>
-    </div>
-    <div class="content">
-        <div class="main clearfix">
+<body class="hold-transition skin-blue sidebar-mini">
+    <div class="wrapper">
 
-            <div class="m_l" id="leftH" style="width: 100%;">
-                <h2>中国高等教育学历证书查询结果</h2>
-                <div id="result">
-                    <div class="m_cnt_m clearfix">
-                        <div class="xlcx-list">
-                            <table id="xl-table" class="table table-bordered table-striped" style="width: 100%; margin: auto;">
-                               
-                               <tbody id="status">
+        <!-- Main Header -->
+        <header class="main-header">
 
-                               </tbody> 
-                               <tbody id="list">
-                                </tbody>
-                            </table>
+            <!-- Logo -->
+            <a href="/total" class="logo">
+                <!-- mini logo for sidebar mini 50x50 pixels -->
+                <span class="logo-mini">
+                    <b>F</b>NC</span>
+                <!-- logo for regular state and mobile devices -->
+                <span class="logo-lg">
+                    <b>证书认证系统</b>
+                </span>
+            </a>
+
+            <!-- Header Navbar -->
+            <nav class="navbar navbar-static-top" role="navigation">
+                <!-- Sidebar toggle button-->
+                <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                </a>
+                <!-- Navbar Right Menu -->
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+                        <!-- User Account Menu -->
+                        <li class="dropdown user user-menu">
+                            <!-- Menu Toggle Button -->
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <!-- The user image in the navbar-->
+                                <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+                                <!-- hidden-xs hides the username on small devices so only the image appears. -->
+                                <span class="hidden-xs">
+                                    游客
+                                </span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <!-- The user image in the menu -->
+                                <li class="user-header">
+                                    <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                                    <p>
+                                        游客
+                                            <!--<small>Member since Nov. 2012</small>-->
+                                    </p>
+                                </li>
+                                <!-- Menu Body -->
+                                <li class="user-body">
+                                    <!-- /.row -->
+                                </li>
+                                <!-- Menu Footer-->
+                                <li class="user-footer">
+                                    <div class="pull-right-container">
+                                        <!-- <a herf="/changePwd" class="btn btn-default btn-flat" style="float: left;">修改密码</a> -->
+                                        <a href="#" class="btn btn-default btn-flat" style="float: left;">用户登录</a>
+                                        <!-- <button type="button" class="btn btn-default btn-flat" id="change" name="change" style="float: left;">修改密码</button> -->
+                                    </div>
+                                    <div class="pull-right-container">
+                                        <a href="/login" class="btn btn-primary btn-flat" style="float: right;">管理员登录</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- Control Sidebar Toggle Button -->
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- Left side column. contains the logo and sidebar -->
+        <aside class="main-sidebar">
+
+            <!-- sidebar: style can be found in sidebar.less -->
+            <section class="sidebar">
+
+                <!-- Sidebar user panel (optional) -->
+                <div class="user-panel">
+                    <div class="pull-left image">
+                        <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                    </div>
+                    <div class="pull-left info">
+                        <p>
+                            游客
+                        </p>
+                        <!-- Status -->
+                        <a href="#">
+                            <i class="fa fa-circle text-success"></i> 用户</a>
+                    </div>
+                </div>
+
+                <!-- Sidebar Menu -->
+                <ul class="sidebar-menu" data-widget="tree">
+                    <li class="header">目 录</li>
+                    <!-- Optionally, you can add icons to the links -->
+                    <li><a href="/"><i class="fa fa-link"></i><span>返回查询</span></a></li>
+                    <li ><a href="/information"><i class="fa fa-link"></i><span>查询结果</span></a></li>
+                </ul>
+                <!-- /.sidebar-menu -->
+            </section>
+            <!-- /.sidebar -->
+        </aside>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <h1>
+                    证书查询
+                </h1>
+                <ol class="breadcrumb">
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-dashboard"></i> 主页</a>
+                    </li>
+                    <li>证书查询</li>
+                    <li class="active">查询结果</li>
+                </ol>
+            </section>
+
+            <!-- Main content -->
+            <section class="content">
+                <div class="row">
+                    <div class="col-md-12 col-xs-12">
+                        <div class="box">
+                            <div class="box-header">
+                                <h3 class="box-title">查询结果</h3>
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body">
+                               <table class="table" style="border-top: none">
+                                   <tbody id="not_exit" style="display: none">
+                                       <tr>
+                                           <td><label> 恭喜你找到一张假证！</label></td>
+                                       </tr>
+                                   </tbody>
+                                   <tbody id="XWZ_body" style="display: none">
+                                       <tr>
+                                            <td class="col-md-3" style="text-align: right"><label for="num">证书编号：</label></td>
+                                            <td class="col-md-3" >
+                                               <span class="num"></span>
+                                            </td>
+                                           <td class="col-md-3" style="text-align: right"><label for="txtype">层　　次：</label></td>
+                                           <td class="col-md-3">
+                                                <span class="txtype"></span>
+                                           </td>
+                                       </tr>
+                                       <tr>
+                                            <td class="col-md-3" style="text-align: right"><label for="degree">学　　位：</label></td>
+                                            <td class="col-md-3">
+                                                <span id="degree"></span>
+                                            </td>
+                                            <td class="col-md-3" style="text-align: right"><label for="school">学　　校：</label></td>
+                                            <td class="col-md-3">
+                                                <span class="school"></span>
+                                            </td>
+                                        </tr>
+                                       <tr>
+                                            <td class="col-md-3" style="text-align: right"><label for="certdate">发证日期：</label></td>
+                                            <td class="col-md-3">
+                                                <span class="certdate"></span>
+                                            </td>
+                                            <td class="col-md-3" style="text-align: right"><label for="name">姓　　名：</label></td>
+                                            <td class="col-md-3">
+                                                <span class="name"></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-md-3" style="text-align: right"><label for="sex">性　　别：</label></td>
+                                            <td class="col-md-3">
+                                                <span class="sex"></span>
+                                            </td>
+                                            <td class="col-md-3" style="text-align: right"><label for="birthday">出生日期：</label></td>
+                                            <td class="col-md-3">
+                                                <span class="birthday"></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-md-3" style="text-align: right"><label for="major">专　　业：</label></td>
+                                            <td class="col-md-3">
+                                                <span class="msg"></span>
+                                            </td>
+                                        </tr>
+                                   </tbody>
+                                   <tbody id="BYZ_body" style="display: none">
+                                        <tr>
+                                            <td class="col-md-3" style="text-align: right"><label for="num">证书编号：</label></td>
+                                            <td class="col-md-3">
+                                                <span class="num"></span>
+                                            </td>
+                                            <td class="col-md-3" style="text-align: right"><label for="txtype">证书类别：</label></td>
+                                            <td class="col-md-3">
+                                                <span class="txtype"></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-md-3" style="text-align: right"><label for="schoolsystem">学　　制：</label></td>
+                                            <td class="col-md-3">
+                                                <span id="schoolsystem"></span>
+                                            </td>
+                                            <td class="col-md-3" style="text-align: right"><label for="school">学　　校：</label></td>
+                                            <td class="col-md-3">
+                                                <span class="school"></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-md-3" style="text-align: right"><label for="certdate">发证日期：</label></td>
+                                            <td class="col-md-3">
+                                                <span class="certdate"></span>
+                                            </td>
+                                            <td class="col-md-3" style="text-align: right"><label for="name">姓　　名：</label></td>
+                                            <td class="col-md-3">
+                                                <span class="name"></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-md-3" style="text-align: right"><label for="sex">性　　别：</label></td>
+                                            <td class="col-md-3">
+                                                <span class="sex"></span>
+                                            </td>
+                                            <td class="col-md-3" style="text-align: right"><label for="birthday">出生日期：</label></td>
+                                            <td class="col-md-3">
+                                                <span class="birthday"></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-md-3" style="text-align: right"><label for="begin">入学日期：</label></td>
+                                            <td class="col-md-3">
+                                                <span id="begin"></span>
+                                            </td>
+                                            <td class="col-md-3" style="text-align: right"><label for="end">毕业日期：</label></td>
+                                            <td class="col-md-3">
+                                                <span id="end"></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-md-3" style="text-align: right"><label for="major">专　　业：</label></td>
+                                            <td class="col-md-3">
+                                                <span class="major"></span>
+                                            </td>
+                                            <td class="col-md-3" style="text-align: right"><label for="level">层　　次：</label></td>
+                                            <td class="col-md-3">
+                                                <span id="level"></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-md-3" style="text-align: right"><label for="form">学习形式：</label></td>
+                                            <td class="col-md-3">
+                                                <span id="form"></span>
+                                            </td>
+                                            <td class="col-md-3" style="text-align: right"><label for="class">学历类别：</label></td>
+                                            <td class="col-md-3">
+                                                <span id="class"></span>
+                                            </td>
+                                        </tr>
+                                   </tbody>
+                               </table>
+                            </div>
+                            <div class="box-footer"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-xs-12">
+                        <div class="box">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">证书样例展示</h3>
+                                <div class="box-tools pull-right">
+                                    <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse">
+                                        <i class="fa fa-minus"></i></button>
+                                    <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="" data-original-title="Remove">
+                                        <i class="fa fa-times"></i></button>
+                                </div>
+                            </div>
+                            <div class="box-body">
+                                <img src="#" id="img" style="display: none" width="100%" height="auto" alt="证书样本"></img>
+                                <label for="info" id="info" style="display: none">暂无样本</label>
+                            </div>
+                            <!-- /.box-body -->
+                            <div class="box-footer">
+                            <!-- footer -->
+                            </div>
+                            <!-- /.box-footer-->
                         </div>
                     </div>
                 </div>
-                <div class="xlcx-prompt">
-                    <strong>证书样例显示：</strong>
-                    <div class="col-md-8">
-                        <img src="#" id="img" style="display: none" width="100%" height="auto" alt="证书样本"></img>
-                        <label for="info" id="info" style="display: none">暂无样本</label>
-                    </div>
-                </div>
-            </div>
+                
+            </section>
         </div>
-        <!-- 显示图片 -->
+        <!-- /.content-wrapper -->
 
+        <!-- Main Footer -->
+        <footer class="main-footer">
+            <!-- To the right -->
+            <div class="pull-right hidden-xs">
+                Anything you want
+            </div>
+            <!-- Default to the left -->
+            <strong>Copyright &copy; 2018
+                <a href="#">TheRang</a>.</strong> All rights reserved.
+        </footer>
     </div>
-    </section>
-    <div class='xlcx-center'>
+    <!-- ./wrapper -->
 
-    </div>
-    </div>
+    <!-- REQUIRED JS SCRIPTS -->
+
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap 3.3.7 -->
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- DataTables -->
+    <script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <!-- SlimScroll -->
+    <script src="bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+    <!-- FastClick -->
+    <script src="bower_components/fastclick/lib/fastclick.js"></script>
+    <!-- AdminLTE App -->
+    <script src="dist/js/adminlte.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="bower_components/raphael/raphael.min.js"></script>
+    <script src="bower_components/morris.js/morris.min.js"></script>
+    <script src="dist/js/demo.js"></script>
+    <script src="dist/js/xlsx.core.min.js"></script>
     <script>
         var mess = "<%= messages %>";
-        var pic_src = "<%= pic_src %>"
-        // console.log(pic);
+        var pic_src = "<%= pic_src %>";
         var reg = new RegExp("&#34;", "g"); //创建正则RegExp对象     
         mess = mess.replace(reg, '"');
         pic_src = pic_src.replace(reg, '"');
-        // console.log(mess);
-        let data = {};
-        var html0='';
-        var html1 = '';
-        var cmd = '';
-        if (mess) {
-            data = eval('(' + mess + ')');
+        let data = eval('(' + mess + ')');
+        console.log(data);
+        if(data){
+            data = JSON.parse(data);
+            // console.log(data);
+            // console.log(data.num);
+            $('.num').val(data.num);
+            $('.txtype').val(data.txtype);
+            $('.school').val(data.school);
+            $('.certdate').val(data.certdate);
+            $('.name').val(data.name);
+            $(".sex").val(data.sex);
+            $(".birthday").val(data.birthday);
+            $(".major").val(data.major);
+            //毕业证
+            if(data.num.length == 18){
+                $('#begin').val(data.begin);
+                $('#end').val(data.end);
+                $('#level').val(data.level);
+                $('#class').val(data.class);
+                $('#form').val(data.form);
+                $("#schoolsystem").val(data.schoolsystem);
+                $('#BYZ_body').show();
+                $('#XWZ_body').hide();
+            }else{//学位证
+                $('#degree').val(data.degree);
+                $('#XWZ_body').show();
+                $('#BYZ_body').hide();
+            }
             if(data.status){
-                html0='<tr><td>该证书已被撤销！</td></tr>'+
-                '<tr><td> 撤销原因为：</td></tr>'+
-                '<td>'+data.reason+'</td></tr>'+
-                '<tr><td>证书原始数据如下:</td></tr>'
+                var html = '';
+                html += '<tr>' +
+                            '<td class="col-md-3" style="text-align: right"><label for="status">证书状态：</label></td>' +
+                            '<td><span>' + data.status + '</span></td>' +
+                        '</tr>' +
+                        '<tr>' +
+                            '<td class="col-md-3" style="text-align: right"><label for="reason">撤销原因：</label></td>' +
+                            '<td colspan="3"><span>' + data.reason + '</span></input>' +
+                        '</tr>';
+                $('tbody').append(html);
+                if(pic_src){
+                    $('#img').show();
+                    $('#img').attr("src", pic_src);
+                }else{
+                    $('#info').show();
+                }  
             }
-            if (data.num.length == 18) {
-                html1 += '<tr> <th> 姓名 ：</th>' +
-                    '<td>' + data.name + '</td>' +
-                    '<th> 性别 :</th>' +
-                    '<td>' + data.sex + '</td></tr>' +
-                    '<tr><th> 出生日期： </th>' +
-                    '<td>' + data.birthday + '</td>' +
-                    '<th> 入学日期： </th>' +
-                    '<td>' + data.begin + '</td></tr>' +
-                    '<tr><th > 毕业日期： </th>' +
-                    '<td>' + data.end + '</td>' +
-                    '<th> 学校名称： </th>' +
-                    '<td>' + data.school + '</td></tr>' +
-                    '<tr><th > 专业： </th>' +
-                    '<td>' + data.major + '</td>' +
-                    '<th> 学历类别： </th>' +
-                    '<td>' + data.txtype + '</td></tr>' +
-                    '<tr><th> 学制： </th>' +
-                    '<td>' + data.schoolsystem + '</td>' +
-                    '<th> 学习形式： </th>' +
-                    '<td>' + data.form + '</td></tr>' +
-                    '<tr><th > 层次： </th>' +
-                    '<td>' + data.level + '</td>' +
-                    '<th> 证书编号： </th>' +
-                    '<td>' + data.num + '</td></tr>' +
-                    '<tr><th> 发证日期： </th>' +
-                    '<td>' + data.certdate + '</td></tr>'
-            } else {
-                html1 += '<tr> <th class="td-width-1"> 姓名 ：</th>' +
-                    '<td class="td-width-2" id="name">' + data.name + '</td>' +
-                    '<th class="td-width-3"> 性别 :</th>' +
-                    '<td>' + data.sex + '</td></tr>' +
-                    '<tr><th> 出生日期： </th>' +
-                    '<td>' + data.birthday + '</td>' +
-                    '<th> 学校名称： </th>' +
-                    '<td>' + data.school + '</td></tr>' +
-                    '<tr><th > 专业： </th>' +
-                    '<td>' + data.major + '</td>' +
-                    '<th> 学历类别： </th>' +
-                    '<td>' + data.txtype + '</td></tr>' +
-                    '<tr><th > 学科： </th>' +
-                    '<td>' + data.degree + '</td>' +
-                    '<th> 证书编号： </th>' +
-                    '<td>' + data.num + '</td></tr>'+
-                    '<tr><th> 发证日期： </th>' +
-                    '<td>' + data.certdate + '</td></tr>'
-            }
-
-            if(pic_src){
-                $('#img').show();
-                $('#img').attr("src", pic_src);
-            }else{
-                $('#info').show();
-            }
-        } else if (mess === "") {
-            html1 = '<tr> <td > 恭喜你找到一张假证！ </td></tr>'
+        }else{
+            $('#not_exit').show();
+            $('#info').show();
         }
-        $('#status').append(html0);
-        $('#list').append(html1);
-        var certdate = $('#certdate').val();
-        var txtype = "";
-        //此处可以先判断输入日期是否有误
     </script>
-
-
 </body>
 
 </html>

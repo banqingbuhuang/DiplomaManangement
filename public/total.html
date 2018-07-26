@@ -1,128 +1,274 @@
-<!doctype html>
+<!DOCTYPE html>
+<!--
+This is a starter template page. Use this page to start your new project from
+scratch. This page gets rid of all links and provides the needed markup only.
+-->
 <html>
-
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-    <title>证书查询--学位信息管理系统</title>
-    <link rel="icon" href="/favicon.ico?v=1483494816229" type="image/x-icon" />
-    <link rel="stylesheet" href='https://t4.chei.com.cn/chsi/css/common2014.css?v=1483494816229'>
-    <link rel="stylesheet" href='https://t1.chei.com.cn/common/ch/iconfont.css?v=1483494816229'>
-    <link rel="stylesheet" href='https://t1.chei.com.cn/chsi/xlcx/lscx/css/min/lscx.min.css?v=1483494816231' />
-    <link rel="stylesheet" href='https://t1.chei.com.cn/common/plugins/dialog/6.0.5/css/ui-dialog.css?v=1483494816229'>
-    <script src='https://t1.chei.com.cn/common/jquery/1.9.1/jquery.min.js?v=1483494816229'></script>
-    <script src='https://t1.chei.com.cn/common/plugins/dialog/6.0.5/dialog-min.js?v=1483494816229'></script>
-    <script src='https://t1.chei.com.cn/common/plugins/validation/jquery.validate.min.js?v=1483494816229'></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=chrome">
+    <title><%=title%></title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+    <!-- bootstrap slider -->
+    <link rel="stylesheet" href="plugins/bootstrap-slider/slider.css">
+    <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
+          page. However, you can choose any other skin. Make sure you
+          apply the skin class to the body tag so the changes take effect. -->
+    <link rel="stylesheet" href="dist/css/skins/skin-blue.min.css">
+    <link rel="stylesheet" href="dist/css/mycss.css">
 
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 
-    <script src="https://t1.chei.com.cn/common/js/boomerang-min-20141211.js"></script>
+    <!-- Google Font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <style>
 
-    <script>
-        var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', 'UA-100524-1']);
-        _gaq.push(['_trackPageview']);
-        (function () {
-            var ga = document.createElement('script');
-            ga.type = 'text/javascript';
-            ga.async = true;
-            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'https://www') +
-                '.google-analytics.com/ga.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(ga, s);
-        })();
-    </script>
+        .container {
+            width: 310px;
+            margin:auto;
+            padding: 0px;
+        }
+
+        #msg {
+            width: 100%;
+            line-height: 40px;
+            font-size: 14px;
+            text-align: center;
+        }
+    </style>
 </head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
 
-<body>
-    <div class="header">
-        <div class="t_top_nav">
-            <div class="width1000 clearfix">
-                <div class="t_top_nav_l">
-                    <span style="color:#d94840">&nbsp;</span>
-                </div>
-                <div class="t_top_nav_r">
-                    <a href='/login'>登录</a>
-                </div>
-                <div class="clearit"></div>
+    <!-- Main Header -->
+    <header class="main-header">
+
+        <!-- Logo -->
+        <a href="/total" class="logo">
+            <!-- mini logo for sidebar mini 50x50 pixels -->
+            <span class="logo-mini"><b>F</b>NC</span>
+            <!-- logo for regular state and mobile devices -->
+            <span class="logo-lg"><b>证书认证系统</b></span>
+        </a>
+
+        <!-- Header Navbar -->
+        <nav class="navbar navbar-static-top" role="navigation">
+            <!-- Sidebar toggle button-->
+            <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                <span class="sr-only">Toggle navigation</span>
+            </a>
+            <!-- Navbar Right Menu -->
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <!-- User Account Menu -->
+                    <li class="dropdown user user-menu">
+                        <!-- Menu Toggle Button -->
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <!-- The user image in the navbar-->
+                            <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+                            <!-- hidden-xs hides the username on small devices so only the image appears. -->
+                            <span class="hidden-xs">游客</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <!-- The user image in the menu -->
+                            <li class="user-header">
+                                <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                                <p>
+                                    游客
+                                    <!--<small>Member since Nov. 2012</small>-->
+                                </p>
+                            </li>
+                            <!-- Menu Body -->
+                            <li class="user-body">
+                                <!-- /.row -->
+                            </li>
+                            <!-- Menu Footer-->
+                            <li class="user-footer">
+                                <div class="pull-right-container">
+                                    <!-- <a herf="/changePwd" class="btn btn-default btn-flat" style="float: left;">修改密码</a> -->
+                                    <a href="#" class="btn btn-default btn-flat" style="float: left;">用户登录</a>
+                                    <!-- <button type="button" class="btn btn-default btn-flat" id="change" name="change" style="float: left;">修改密码</button> -->
+                                </div>
+                                <div class="pull-right-container">
+                                    <a href="/login" class="btn btn-primary btn-flat" style="float: right;">管理员登录</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- Control Sidebar Toggle Button -->
+                </ul>
             </div>
-        </div>
-        <style type="text/css">
-            .t_nav li {
-                padding-right: 7px;
-            }
-        </style>
-    </div>
-    <div class="content">
-        <div class="main_lscx clearfix">
-            <div class="m_l" id="leftH" style="width: 100%;padding-bottom: 80px;">
-                <h2>中国高等教育学历学位证书查询</h2>
-                <div class="m_cnt_m_lscx marginT20 clearfix">
-                    <div class='form_box clearfix'>
-                        <div class='lscs_l'>
-                            <form name="queryForm" id="queryForm" action="/getCert" method="POST">
-                                <table cellpadding="0" cellspacing="0" border="0">
-                                    <tr>
-                                        <td class='alignR' style="width: 100px;">证书类别：</td>
-                                        <td class="form-group">
-                                            <div class="num_tips"></div>
-                                            <select id="txtype" name="txtype" onchange="a()" autocomplete="off" required='true' maxlength="18" class='lscx_input' placeholder="证书类别">
-                                                <option value="BYZ">学历证书</option>
-                                                <option value="XWZ">学位证书</option>
-                                            </select>
-                                        </td>
-                                        <div>
-                                        </div>
-                                    </tr>
+        </nav>
+    </header>
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="main-sidebar">
 
-                                    <tr>
-                                        <td class='alignR' style="width: 100px;">证书编号：</td>
-                                        <td class="form-group">
-                                            <div class="num_tips"></div>
-                                            <input type="text" class="lscx_input" minlength="18" maxlength="18" id="num" name="num" value="" autocomplete="off" required='true'
-                                                placeholder="证书编号" />
-                                            <script type="text/javascript">
-                                                function a() {
-                                                    var select = document.getElementById("txtype");
-                                                    var value = select.value;
-                                                    if (value == "BYZ") {
-                                                        document.getElementById("num").setAttribute("minlength", "18");
-                                                        document.getElementById("num").setAttribute("maxlength", "18");
-                                                    } else {
-                                                        document.getElementById("num").setAttribute("maxlength", "16");
-                                                        document.getElementById("num").setAttribute("minlength", "16");
-                                                    };
-                                                }
-                                            </script>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>&nbsp;</td>
-                                        <td colspan="4" class='td-btn'>
-                                            <input name="rdmid" id="rdmid" type="hidden" value="m8e1o83px9l8eqxpb7xd8zgxna8bot5q">
-                                            <input name="state" id="state" type="hidden" value="CHSI">
-                                            <button type="submit" id="xueliSubmit" class="btn btn-block btn-primary">查询</button>
-                                            <br/>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </form>
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+
+            <!-- Sidebar user panel (optional) -->
+            <div class="user-panel">
+                <div class="pull-left image">
+                    <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                </div>
+                <div class="pull-left info">
+                    <p>游客</p>
+                    <!-- Status -->
+                    <a href="#"><i class="fa fa-circle text-success"></i> 用户</a>
+                </div>
+            </div>
+
+            <!-- Sidebar Menu -->
+            <ul class="sidebar-menu" data-widget="tree">
+                <li class="header">目 录</li>
+                <!-- Optionally, you can add icons to the links -->
+                <li><a href="/total"><i class="fa fa-link"></i> <span>主界面</span></a></li>
+            </ul>
+            <!-- /.sidebar-menu -->
+        </section>
+        <!-- /.sidebar -->
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                证书查询
+                <small>输入证书编号及姓名进行查询。</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i>主页</a></li>
+                <li class="active">证书查询</li>
+            </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content container-fluid">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="box box-info">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">证书查询</h3>
                         </div>
-                        <div class="lscs_r" style="width: 288px;">
-                            <strong>注意：</strong>
-                            <!-- <br> 1、点此查看
-                            <a href="http://www.chsi.com.cn/help/cxfw.jsp" target="_blank" class="colorBlue">学历证书查询范围</a>。 -->
-                            <br> 1、查询学历证书需经权属人同意。
-                            <br> 2、学历证书查询结果不得用于违背权属人意愿之用途。
-                            <br> 3、学历证书和学位证书由各高校自行印制，学历证书编号通常为18位，学位证书编号通常为16位。不知道证书编号的，可咨询发证学校。
-                            <!--  <span class="colorBlue example_zs">学历证书样例</span>&nbsp;&nbsp;<span class="colorBlue example_zms">学历证明书样例</span> -->
-                        </div>
+                        <form class="form-horizontal" id="query_form" action="/getCert" method="POST">
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <label for="num" class="col-sm-3 control-label">证书编号：</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="num" name="num"/>
+                                        <span style="display: none; color: red" id="msg">请输入正确的证书编号</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="txtype" class="col-sm-3 control-label">证书类别：</label>
+                                    <div class="col-sm-8">
+                                        <select name="txtype" id="txtype" class="btn btn-block btn-default">
+                                            <option value="BYZ" selected="selected">学历证书</option>
+                                            <option value="XWZ">学位证书</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="verifyslider" class="col-sm-3 control-label"></label>
+                                    <div class="col-sm-8">
+                                        <div class="container">
+                                            <div id="verifyslider" style="position: relative"></div>
+                                            <div id="msg" class="msg"></div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <!-- /.box-body -->
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="callout callout-info">
+                        <h4>注意：</h4>
+                        <p>1、查询学历证书需经权属人同意。</p>
+                        <p>2、学历证书查询结果不得用于违背权属人意愿之用途</p>
+                        <p>3、学历证书和证明书由各高校自行印制，证书编号通常为18位。不知道证书编号的，可咨询发证学校。</p>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
+        <!-- /.content -->
     </div>
+    <!-- /.content-wrapper -->
 
+    <!-- Main Footer -->
+    <footer class="main-footer">
+        <!-- To the right -->
+        <div class="pull-right hidden-xs">
+            Anything you want
+        </div>
+        <!-- Default to the left -->
+        <strong>Copyright &copy; 2018 <a href="#">TheRang</a>.</strong> All rights reserved.
+    </footer>
+</div>
+<!-- ./wrapper -->
+
+<!-- REQUIRED JS SCRIPTS -->
+
+<!-- jQuery 3 -->
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/adminlte.min.js"></script>
+<!-- Bootstrap slider -->
+<script src="plugins/bootstrap-slider/bootstrap-slider.js"></script>
+<script src="dist/js/verify.js"></script>
+
+
+<script>
+
+
+    var form = document.getElementById('query_form');
+
+    $('#num').blur(function(){
+        var num = $('#num').val();
+        var txtype = $('#txtype').val();
+        console.log(num.length);
+        console.log(txtype);
+        if((num.length != 18 && txtype == "BYZ") || (num.length != 16 && txtype == "XWZ")){
+            $('#msg').show();
+            // from.attr("disabled",true);
+        }else{
+            $('#msg').hide();
+            // from.attr("disabled",false);
+        }
+    });
+
+    var cleanMsg = function() {
+        document.getElementById('msg').innerHTML = '';
+    }
+    VerifySlider.init({
+        el: document.getElementById('verifyslider'),
+        onSuccess: function() {
+            document.getElementById('msg').innerHTML = '验证成功！';
+            $('#msg').css("color","green");
+            form.submit();
+        },
+        onFail: function() {
+            document.getElementById('msg').innerHTML = '验证失败，请重试！';
+            $('#msg').css("color","red");
+
+        },
+        onRefresh: cleanMsg
+    })
+
+</script>
 </body>
-
-
 </html>

@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=chrome">
+    <title>
+        <%= title %>
+    </title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="bower_components/morris.js/morris.css">
+
+    <link rel="stylesheet" href="bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+    <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
+          page. However, you can choose any other skin. Make sure you
+          apply the skin class to the body tag so the changes take effect. -->
+    <link rel="stylesheet" href="dist/css/skins/skin-blue.min.css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+
+    <!-- Google Font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+</head>
+
+<body class="hold-transition skin-blue sidebar-mini">
+    <div class="wrapper">
+
+        <!-- Main Header -->
+        <header class="main-header">
+
+            <!-- Logo -->
+            <a href="/total" class="logo">
+                <!-- mini logo for sidebar mini 50x50 pixels -->
+                <b>F</b>NC</span>
+                <!-- logo for regular state and mobile devices -->
+                <span class="logo-lg">
+                    <b>学位证书认证系统</b>
+                </span>
+            </a>
+
+            <!-- Header Navbar -->
+            <nav class="navbar navbar-static-top" role="navigation">
+                <!-- Sidebar toggle button-->
+                <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                </a>
+                <!-- Navbar Right Menu -->
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+                        <!-- User Account Menu -->
+                        <li class="dropdown user user-menu">
+                            <!-- Menu Toggle Button -->
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <!-- The user image in the navbar-->
+                                <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+                                <!-- hidden-xs hides the username on small devices so only the image appears. -->
+                                <span class="hidden-xs">
+                                    <%=username%>
+                                </span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <!-- The user image in the menu -->
+                                <li class="user-header">
+                                    <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                                    <p>
+                                        <%=username%>
+                                            <!--<small>Member since Nov. 2012</small>-->
+                                    </p>
+                                </li>
+                                <!-- Menu Body -->
+                                <li class="user-body">
+                                    <!-- /.row -->
+                                </li>
+                                <!-- Menu Footer-->
+                                <li class="user-footer">
+                                    <div class="pull-right-container">
+                                        <a href="/logout" class="btn btn-default btn-flat" style="float: right;">退出</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- Control Sidebar Toggle Button -->
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- Left side column. contains the logo and sidebar -->
+        <aside class="main-sidebar">
+
+            <!-- sidebar: style can be found in sidebar.less -->
+            <section class="sidebar">
+
+                <!-- Sidebar user panel (optional) -->
+                <div class="user-panel">
+                    <div class="pull-left image">
+                        <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                    </div>
+                    <div class="pull-left info">
+                        <p>
+                            <%=username%>
+                        </p>
+                        <!-- Status -->
+                        <a href="#">
+                            <i class="fa fa-circle text-success"></i> 用户</a>
+                    </div>
+                </div>
+
+                <!-- Sidebar Menu -->
+                <ul class="sidebar-menu" data-widget="tree">
+                    <li class="header">目 录</li>
+                    <!-- Optionally, you can add icons to the links -->
+                    <li>
+                        <a href="/conductor">
+                            <i class="fa fa-link"></i>
+                            <span>主界面</span>
+                        </a>
+                    </li>
+                    <li class="treeview active">
+                        <a href="#">
+                            <i class="fa fa-link"></i>
+                            <span>单项操作</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li class="active">
+                                <a href="/history">查询历史</a>
+                            </li>
+                            <li>
+                                <a href="/onemodify">单项修改</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="/excel">
+                            <i class="fa fa-link"></i>
+                            <span>批量录入</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/count">
+                            <i class="fa fa-link"></i>
+                            <span>模糊查询</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/revoke">
+                            <i class="fa fa-link"></i>
+                            <span>撤销</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/sample">
+                            <i class="fa fa-link"></i>
+                            <span>样本</span>
+                        </a>
+                    </li>
+                </ul>
+                <!-- /.sidebar-menu -->
+            </section>
+            <!-- /.sidebar -->
+        </aside>
+
+
+        <div class="content-wrapper" style="background-repeat: no-repeat; background-size: 100% 100%; height: auto; min-height: 100%; background-position: center -300px;height: 600px;">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <h1>
+                    查询历史
+                    <small>历史操作查询</small>
+                </h1>
+                <ol class="breadcrumb">
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-dashboard active"></i> 主页</a>
+                    </li>
+
+                    <li class="active">历史查询</li>
+                </ol>
+            </section>
+
+            <!-- Main content -->
+            <section class="content">
+                <div class="row">
+                    <div class="col-md-12 col-xs-12">
+                        <div class="box">
+                            <div class="box-header">
+                                <h3 class="box-title">历史查询</h3>
+                                <div class="col-xs-2" style="float: right">
+                                    <button type="button" id="search" class="btn btn-block btn-primary">查询</button>
+                                </div>
+                                <div class="col-xs-3" style="float: right">
+                                    <input type="text" name="num" class="form-control" id="num" placeholder="请输入证书编号">
+                                </div>
+                                <div class="col-xs-2" style="float: right">
+                                    <select id="Txtype" name="Txtype" class="btn btn-block btn-default">
+                                        <option value="XWZ">学位证书</option>
+                                        <option value="BYZ" selected="selected">学历证书</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="box-body">
+                                <div class="col-md-12 col-xs-12" id="result" style="display: none">
+                                    <h4 class="box-title">查询结果</h4>
+                                    <table id="his_table" class="table table-bordered table-striped">
+                                        <thead>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                        </thead>
+                                        <tbody id="count">
+                                        </tbody>
+                                        <tbody id="list">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <script src="bower_components/jquery/dist/jquery.min.js"></script>
+            <!-- Bootstrap 3.3.7 -->
+            <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+            <!-- DataTables -->
+            <script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+            <script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+            <!-- SlimScroll -->
+            <script src="bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+            <!-- FastClick -->
+            <script src="bower_components/fastclick/lib/fastclick.js"></script>
+            <!-- AdminLTE App -->
+            <script src="dist/js/adminlte.min.js"></script>
+            <!-- AdminLTE for demo purposes -->
+            <script src="bower_components/raphael/raphael.min.js"></script>
+            <script src="bower_components/morris.js/morris.min.js"></script>
+            <script src="dist/js/demo.js"></script>
+            <script>
+                let username = "<%=username%>";
+                console.log(username);
+                let count = 0;
+                let html0 = '';
+                let html = '';
+                let a = '';
+                $('#search').click(function () {
+                    let Txtype = $('#Txtype').val();
+                    let num = $('#num').val();
+                    let key = Txtype + num;
+                    let cmd = 'query("history","' + key + '")';
+                    console.log(cmd);
+                    $.ajax({
+                        url: '/api',
+                        type: 'post',
+                        data: {
+                            cmd: cmd
+                        },
+                        success: function (data) {
+                            console.log(data);
+                            // data=JSON.parse(data);
+                            // console.log(data);
+                            data = eval('(' + data + ')');
+                            if (data == []) {
+                                html0 = '<tr><td>查无此证！</td></tr>';
+                            } else {
+                                let tx = [];
+                                for (let k = 0; k < data.length; k++) {
+                                    let value = data[k].value;
+                                    let timestamp = data[k].timestamp;
+                                    tx.push({
+                                        'timestamp': timestamp,
+                                        'value': value
+                                    });
+                                    count = k + 1;
+                                }
+                                console.log(count);
+                                html0 = '<tr><th>共找到' + count + '条记录</th></tr>';
+                                $.each(tx, function (i, item) {
+                                    var a = i + 1;
+                                    if (item.value.num.length === 18) {
+                                        html += '<tr><td id="tds">' + a +
+                                            '<tr><th>操作时间：</th>' +
+                                            '<td>' + item.timestamp + '</td></tr>' +
+                                            '<tr> <th> 姓名 ：</th>' +
+                                            '<td>' + item.value.name + '</td>' +
+                                            '<th> 性别 :</th>' +
+                                            '<td>' + item.value.sex + '</td></tr>' +
+                                            '<tr><th> 出生日期： </th>' +
+                                            '<td>' + item.value.birthday + '</td>' +
+                                            '<th> 入学日期： </th>' +
+                                            '<td>' + item.value.begin + '</td></tr>' +
+                                            '<tr><th > 毕业日期： </th>' +
+                                            '<td>' + item.value.end + '</td>' +
+                                            '<th> 学校名称： </th>' +
+                                            '<td>' + item.value.school + '</td></tr>' +
+                                            '<tr><th > 专业： </th>' +
+                                            '<td>' + item.value.major + '</td>' +
+                                            '<th> 学历类别： </th>' +
+                                            '<td>' + item.value.txtype + '</td></tr>' +
+                                            '<tr><th> 学制： </th>' +
+                                            '<td>' + item.value.schoolsystem + '</td>' +
+                                            '<th> 学习形式： </th>' +
+                                            '<td>' + item.value.form + '</td></tr>' +
+                                            '<tr><th > 层次： </th>' +
+                                            '<td>' + item.value.level + '</td>' +
+                                            '<th> 证书编号： </th>' +
+                                            '<td>' + item.value.num + '</td></tr>' +
+                                            '<tr><th> 发证日期： </th>' +
+                                            '<td>' + item.value.certdate + '</td></tr>'
+                                    } else {
+                                        html += '<tr><td id="tds">' + a + '</td></tr>' +
+                                            '<tr><th>操作时间：</th>' +
+                                            '<td>' + item.timestamp + '</td></tr>' +
+                                            '<tr> <th> 姓名 ：</th>' +
+                                            '<td>' + item.value.name + '</td>' +
+                                            '<th> 性别 :</th>' +
+                                            '<td>' + item.value.sex + '</td></tr>' +
+                                            '<tr><th> 出生日期： </th>' +
+                                            '<td>' + item.value.birthday + '</td>' +
+                                            '<th> 学校名称： </th>' +
+                                            '<td>' + item.value.school + '</td></tr>' +
+                                            '<tr><th > 专业： </th>' +
+                                            '<td>' + item.value.major + '</td>' +
+                                            '<th> 学历类别： </th>' +
+                                            '<td>' + item.value.txtype + '</td></tr>' +
+                                            '<tr><th > 学科： </th>' +
+                                            '<td>' + item.value.degree + '</td>' +
+                                            '<th> 证书编号： </th>' +
+                                            '<td>' + item.value.num + '</td></tr>' +
+                                            '<tr><th> 发证日期： </th>' +
+                                            '<td>' + item.value.certdate + '</td></tr>'
+                                        if (item.value.status) {
+                                            html += '<tr><td>该证书已被撤销！</td></tr>' +
+                                                '<tr><td> 撤销原因为：</td></tr>' +
+                                                '<td>' + item.value.reason + '</td></tr>'
+                                        }
+                                    }
+                                });
+                                $('#count').append(html0);
+                                $('#list').append(html);
+                                // $('#his_table').DataTable();
+                                $('#result').show();
+                            };
+                        },
+                        error: function (e) {
+                            alert('server error!');
+                        }
+                    });
+
+                });
+            </script>
+</body>
+
+</html>

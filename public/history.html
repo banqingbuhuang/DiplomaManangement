@@ -315,7 +315,7 @@
                             count = k + 1;
                         }
                         console.log(count);
-                        
+
                         // $.each(tx, function (i, item) {
                         for (let i in tx) {
                             var a = Number(i) + 1;
@@ -323,8 +323,8 @@
                             console.log(item);
                             if (item.value.school == college && item.value.level == role) {
                                 if (item.value.num.length === 18) {
-                                    html += '<tr><td id="tds">' + a + '</td></tr>' +
-                                        '<tr><th>操作时间：</th>' +
+                                    html += '<tr><td id="tds">第' + a + '次操作</td>' +
+                                        '<th>操作时间：</th>' +
                                         '<td>' + item.timestamp + '</td></tr>' +
                                         '<tr> <th> 姓名 ：</th>' +
                                         '<td>' + item.value.name + '</td>' +
@@ -353,8 +353,8 @@
                                         '<tr><th> 发证日期： </th>' +
                                         '<td>' + item.value.certdate + '</td></tr>';
                                 } else {
-                                    html += '<tr><td id="tds">' + a + '</td></tr>' +
-                                        '<tr><th>操作时间：</th>' +
+                                    html += '<tr><td id="tds">第' + a + '次操作</td>' +
+                                        '<th>操作时间：</th>' +
                                         '<td>' + item.timestamp + '</td></tr>' +
                                         '<tr> <th> 姓名 ：</th>' +
                                         '<td>' + item.value.name + '</td>' +
@@ -376,7 +376,7 @@
                                         '<td>' + item.value.certdate + '</td>' +
                                         '<th > 层次： </th>' +
                                         '<td>' + item.value.level + '</td></tr>';
-                                    if (item.value.status) {
+                                    if (item.value.status=="撤销") {
                                         html += '<tr><td>该证书已被撤销！</td></tr>' +
                                             '<tr><td> 撤销原因为：</td></tr>' +
                                             '<td>' + item.value.reason +
@@ -384,8 +384,8 @@
                                     }
                                 }
                                 html0 = '<tr><th>共找到' + count + '条记录</th></tr>';
-                            }else{
-                                html0='<tr><th>该查询结果不在您查询权限内！</th></tr>';
+                            } else {
+                                html0 = '<tr><th>该查询结果不在您查询权限内！</th></tr>';
                             }
                         }
                         $('#count').append(html0);

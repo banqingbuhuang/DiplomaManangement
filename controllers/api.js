@@ -21,21 +21,21 @@ exports.login = function (req, res, next) {
     let college = req.body.college;
     let role = req.body.role;
 
-    var timestamp = Date.now();//获取当前时间戳
+    var timestamp = Date.now(); //获取当前时间戳
     //剩余次数和时间戳
     var user_info = {
         "num": 10,
-        "timestamp" : timestamp
+        "timestamp": timestamp
     };
-    if(user_list[username]){//已存在
+    if (user_list[username]) { //已存在
         var old_timestamp = user_list[username].timestamp;
-        if(user_list[username].num == 0 && (new Date(timestamp).toDateString() == new Date(old_timestamp).toDateString())){
+        if (user_list[username].num == 0 && (new Date(timestamp).toDateString() == new Date(old_timestamp).toDateString())) {
             return res.render('login', {
                 title: 'Login',
                 messages: ('今日剩余次数为0，请明日再试！')
             });
         }
-    }else{
+    } else {
         user_list[username] = user_info;
     }
     (async () => {
@@ -74,13 +74,13 @@ exports.login = function (req, res, next) {
                     var num = user_list[username].num;
                     user_info = {
                         "num": num - 1,
-                        "timestamp" : timestamp
+                        "timestamp": timestamp
                     };
                     user_list[username] = user_info;
                     var times = user_list[username].num;
                     return res.render('login', {
                         title: 'Login',
-                        messages:  '无效的用户名或密码错误!'
+                        messages: '无效的用户名或密码错误!'
                     });
                 }
             }
@@ -98,7 +98,7 @@ exports.login = function (req, res, next) {
 
 exports.logout = function (req, res, next) {
     let username = req.session.username;
-    
+
     delete fc_list[username];
     req.session.destroy();
     return res.render('total', {
@@ -303,7 +303,6 @@ exports.api = function (req, res, next) {
 
 exports.getAllTx = function (req, res, next) {
     var username = req.session.username;
-    
     console.log("username=" + username);
     if (username === null) {
         return res.render('login', {
@@ -324,6 +323,7 @@ exports.getAllTx = function (req, res, next) {
                     'timestamp': timestamp,
                     'value': value
                 });
+
             }
             res.write(JSON.stringify(tx));
 
@@ -357,10 +357,9 @@ exports.remove = function (req, res, next) {
             // console.log(msg);
             if (!curtx) {
                 res.write('无此证书！');
-            }else if(eval('(' + curtx + ')').school!==college||eval('(' + curtx + ')').level!==role){
+            } else if (eval('(' + curtx + ')').school !== college || eval('(' + curtx + ')').level !== role) {
                 res.write('您没有撤销该证书的权限！');
-            } 
-            else if (eval('(' + curtx + ')').status) {
+            } else if (eval('(' + curtx + ')').status) {
                 res.write('该证书已被撤销！');
             } else {
                 let result = JSON.parse(curtx);
@@ -451,8 +450,7 @@ exports.getCert = function (req, res, next) {
 
 exports.rangesearch = function (req, res, next) { //模糊查询
     var username = req.session.username;
-    let college = req.session.college;
-    let role = req.session.role;
+    
     console.log("username=" + username);
     if (username === null) {
         return res.render('login', {
@@ -460,18 +458,25 @@ exports.rangesearch = function (req, res, next) { //模糊查询
             messages: '请先登录!'
         });
     }
-
     (async () => {
         try {
             let fc = fc_list[username];
             let num = req.body.num;
             let school = req.body.school;
+            let level=req.body.level;
             let certdate = req.body.certdate;
             let name = req.body.name;
             let major = req.body.major;
             let txtype = req.body.txtype;
+            let sex = req.body.sex;
             console.log(txtype);
             let filter = []
+            // filter.push({
+            //     school: college
+            // });
+            // filter.push({
+            //     level: role
+            // })
             if (txtype !== "") {
                 filter.push({
                     txtype: txtype
@@ -487,6 +492,11 @@ exports.rangesearch = function (req, res, next) { //模糊查询
                     school: school
                 })
             }
+            if (level !== "") {
+                filter.push({
+                    level: level
+                })
+            }
             if (certdate !== "") {
                 filter.push({
                     certdate: certdate
@@ -500,6 +510,11 @@ exports.rangesearch = function (req, res, next) { //模糊查询
             if (major !== "") {
                 filter.push({
                     major: major
+                })
+            }
+            if (sex !== "") {
+                filter.push({
+                    sex: sex
                 })
             }
             console.log(filter);

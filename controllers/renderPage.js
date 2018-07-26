@@ -35,7 +35,7 @@ exports.renderRegister = function (req, res) {
 exports.renderTotal = function (req, res, next) {
     res.render('total', {
         title: 'Total',
-        // username: req.session.username
+        messages:null
     });
 };
 
@@ -54,7 +54,7 @@ exports.renderRevoke = function (req, res, next) {
             title: 'Revoke',
             username: req.session.username,
             college: req.session.college,
-            role: req.session.role
+                role: req.session.role
         });
     }
 };
@@ -73,7 +73,7 @@ exports.renderExcel = function (req, res, next) {
             title: 'excel',
             username: req.session.username,
             college: req.session.college,
-            role: req.session.role
+                role: req.session.role
         });
     }
 };
@@ -92,7 +92,7 @@ exports.renderSample = function (req, res, next) {
             title: 'Sample',
             username: req.session.username,
             college: req.session.college,
-            role: req.session.role
+                role: req.session.role
         });
     }
 };
@@ -109,7 +109,7 @@ exports.renderCount = function (req, res, next) {
             title: 'Count',
             username: req.session.username,
             college: req.session.college,
-            role: req.session.role
+                role: req.session.role
         });
     }
 };
@@ -124,7 +124,7 @@ exports.renderConductor = function (req, res, next) {
             title: 'Conductor',
             username: req.session.username,
             college: req.session.college,
-            role: req.session.role
+                role: req.session.role
         });
     }
 };
@@ -133,7 +133,7 @@ exports.renderConductor = function (req, res, next) {
 exports.renderInformation = function (req, res, next) {
     res.render('information', {
         title: 'Information',
-        // username: req.session.username
+        username: req.session.username
     });
 };
 
@@ -148,7 +148,7 @@ exports.renderOnemodify = function (req, res, next) {
             title: 'Onemodify',
             username: req.session.username,
             college: req.session.college,
-            role: req.session.role
+                role: req.session.role
         });
     }
 };
@@ -164,7 +164,7 @@ exports.renderHistory = function (req, res, next) {
             title: 'History',
             username: req.session.username,
             college: req.session.college,
-            role: req.session.role
+                role: req.session.role
         });
     }
 };

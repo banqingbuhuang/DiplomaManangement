@@ -216,6 +216,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             <td class="col-md-3">
                                                 <span class="msg"></span>
                                             </td>
+                                            <td class="col-md-3" style="text-align: right"><label for="level">层　　次：</label></td>
+                                            <td class="col-md-3">
+                                                <span class="level"></span>
+                                            </td>
                                         </tr>
                                    </tbody>
                                    <tbody id="BYZ_body" style="display: none">
@@ -375,11 +379,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
             $(".sex").val(data.sex);
             $(".birthday").val(data.birthday);
             $(".major").val(data.major);
+            $('.level').val(data.level);
             //毕业证
             if(data.num.length == 18){
                 $('#begin').val(data.begin);
                 $('#end').val(data.end);
-                $('#level').val(data.level);
+                // $('#level').val(data.level);
                 $('#class').val(data.class);
                 $('#form').val(data.form);
                 $("#schoolsystem").val(data.schoolsystem);

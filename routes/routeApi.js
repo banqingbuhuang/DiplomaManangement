@@ -29,7 +29,7 @@ module.exports = function (app) {
     app.route('/getMyTxHistory')
         .get(api.getMyTxHistory);
 
-        
+
     app.route('/getAllTx')
         .get(api.getAllTx);
 
@@ -39,8 +39,7 @@ module.exports = function (app) {
     app.route('/getCert')
         .post(api.getCert);
 
-    // app.route('/getModify')
-    //     .post(api.getModify);
+
 
     app.route('/rangesearch')
         .post(api.rangesearch);

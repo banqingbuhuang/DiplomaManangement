@@ -342,6 +342,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         <tr>
                                             <th>证书编号</th>
                                             <th>证书类别</th>
+                                            <th>层次</th>
                                             <th>学位</th>
                                             <th>学校</th>
                                             <th>发证日期</th>
@@ -509,7 +510,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         }
                         var count = arr.length;
                         $('#count').text(count);
-                        if (Txtype == "xs_XWZ" || Txtype == "ss_XWZ" || Txtype == "bs_XWZ") {
+                        if (Txtype == "XWZ") {
                             var XWZ_table = $('#XWZ_table').DataTable();
                             if (XWZ_table) {
                                 XWZ_table.clear();
@@ -521,6 +522,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 html += '<tr>' +
                                     '<td id="tds">' + item.num + '</td>' +
                                     '<td id="tds">' + item.txtype + '</td>' +
+                                    '<td id="tds">' + item.level + '</td>' +
                                     '<td id="tds">' + item.degree + '</td>' +
                                     '<td id="tds">' + item.school + '</td>' +
                                     '<td id="tds">' + item.certdate + '</td>' +
@@ -535,7 +537,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         '<td id="tds"><i class="fa fa-fw fa-check"></i></td>';
                                 }
                                 html += '</tr>';
-
                             });
                             $('#XWZ_body').append(html);
                             $('#XWZ_table').DataTable();
